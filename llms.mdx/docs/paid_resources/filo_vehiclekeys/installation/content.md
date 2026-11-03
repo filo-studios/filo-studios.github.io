@@ -6,51 +6,158 @@
 
 ## Dependencies [#dependencies]
 
-| Resource                                                           | Required | Notes                               |
-| ------------------------------------------------------------------ | -------- | ----------------------------------- |
-| [oxmysql](https://github.com/overextended/oxmysql)                 | Yes      |                                     |
-| [ox\_lib](https://github.com/overextended/ox_lib)                  | Yes      |                                     |
-| [filo\_textui](https://filo.tebex.io/package/filo-textui)          | Yes      |                                     |
-| [eye\_minigames](https://github.com/invalid0190/eye_minigames)     | Yes      |                                     |
-| [community\_bridge](https://github.com/blamefilo/community_bridge) | Yes      | Framework abstraction layer         |
-| [filo\_blips](https://github.com/blamefilo/filo_blips)             | No       | Falls back to native FiveM blips    |
-| ox\_target / qb-target                                             | No       | Falls back to textui if not present |
-| [xsound](https://github.com/Xogy/xsound)                           | No       | Ignition and hotwire sound effects  |
+| Resource                                                                         | Required    | Used for                                                                                          |
+| -------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------- |
+| [ox\_lib](https://github.com/overextended/ox_lib)                                | Yes         | Callbacks, keybinds, progress bars, notifications                                                 |
+| [oxmysql](https://github.com/overextended/oxmysql)                               | Yes         | Key data storage                                                                                  |
+| [community\_bridge](https://github.com/blamefilo/community_bridge)               | Yes         | Framework, inventory and notification bridge                                                      |
+| [sleepless\_prompts](https://github.com/Sleepless-Development/sleepless_prompts) | Yes         | In-vehicle and locksmith prompts (included in the download)                                       |
+| [eye\_minigames](https://github.com/invalid0190/eye_minigames)                   | Default     | Minigames when `Config.Minigames = 'builtin'`                                                     |
+| tr\_minigames + tr\_core                                                         | Optional    | Physical lockpick and hotwire when `Config.Minigames = 'tr_minigames'` (included, pre-configured) |
+| ox\_target                                                                       | Optional    | Locksmith interactions when `Config.InteractionType = 'target'`                                   |
+| ps-dispatch                                                                      | Optional    | Dispatch when `Config.Dispatch.System = 'ps-dispatch'`                                            |
+| [xsound](https://github.com/Xogy/xsound)                                         | Optional    | Ignition sounds                                                                                   |
+| filo\_blips                                                                      | Optional    | Locksmith blips (falls back to native blips)                                                      |
+| baseevents                                                                       | Recommended | Lock state and NPC vehicle locking on entry                                                       |
+
+Supported frameworks (through community\_bridge): Qbox, QBCore and ESX.
+
+<Callout type="warn">
+  `filo_textui` is no longer used. v2.0.0 uses `sleepless_prompts` for all prompts.
+</Callout>
 
 ## Setup [#setup]
 
 <Steps>
   <Step>
-    Download and extract `filo_vehiclekeys` into your resources folder.
+    Put 
+
+    `filo_vehiclekeys`
+
+     (and 
+
+    `sleepless_prompts`
+
+    , 
+
+    `tr_core`
+
+    , 
+
+    `tr_minigames`
+
+     from the download) in your resources folder.
   </Step>
 
   <Step>
-    Add the following to your `server.cfg`:
+    Add the items from 
+
+    `INSTALL/ox_inventory.txt`
+
+     to your inventory and copy the images from 
+
+    `INSTALL/item images`
+
+    . If you use tr_minigames, also add 
+
+    `wire_strippers`
+
+     from 
+
+    `tr_minigames/install/ox_inventory/items.lua`
+
+    .
+  </Step>
+
+  <Step>
+    Ensure the resources after their dependencies:
 
     ```
     ensure ox_lib
-    ensure qbx_core # or the framework you are using
-    ensure ox_target
-    ensure ox_inventory
+    ensure oxmysql
     ensure community_bridge
-    ensure eye_minigames
-    ensure filo_textui
+    ensure sleepless_prompts
     ensure filo_vehiclekeys
+    ensure tr_core      # only with Config.Minigames = 'tr_minigames'
+    ensure tr_minigames
     ```
   </Step>
 
   <Step>
-    Start your server. The SQL table is created automatically on first boot — no manual database imports required.
+    Start the server. The 
+
+    `filo_vehiclekeys`
+
+     table is created automatically.
   </Step>
 
   <Step>
-    Configure the resource to match your server setup. See the [Configuration](/docs/filo_vehiclekeys/configuration) page.
+    Remove any other vehicle key resource. This one provides 
+
+    `qb-vehiclekeys`
+
+    , 
+
+    `qbx_vehiclekeys`
+
+     and 
+
+    `filo_vehiclekey`
+
+    .
   </Step>
 </Steps>
 
+## Items [#items]
+
+| Item                             | Purpose                                                       |
+| -------------------------------- | ------------------------------------------------------------- |
+| `vehiclekey`                     | The key or fob itself (metadata holds plate and key ID)       |
+| `lockpick` / `advanced_lockpick` | Lockpicking                                                   |
+| `electrical_tools`               | Hotwiring and repairing hotwired ignitions                    |
+| `blank_key`                      | Consumed when a locksmith makes a key                         |
+| `key_cutting_tool`               | Cutting mechanical keys                                       |
+| `locksmith_tablet`               | Programming fobs over OBD                                     |
+| `police_bypass`                  | Police master key (only if `Config.PoliceBypass.Item` is set) |
+
+```lua
+["police_bypass"] = {
+    label = "Police Master Key",
+    weight = 50,
+    stack = false,
+    close = true,
+    description = "Unlocks and starts any vehicle (police only).",
+},
+```
+
+<Callout type="info">
+  `vehiclekey` must have `stack = false`: each key is a unique item with its own metadata.
+</Callout>
+
+## Controls [#controls]
+
+| Default key | Action                                             |
+| ----------- | -------------------------------------------------- |
+| `L`         | Lock / unlock the closest vehicle                  |
+| `G`         | Insert / remove the key (hold to start the engine) |
+| `M`         | Engine on / off                                    |
+| `H`         | Hotwire                                            |
+| `Y`         | Search the vehicle for keys                        |
+
+Players can rebind these in the FiveM key bindings menu. Defaults are in `Config.DefaultKeybinds`.
+
+## Commands [#commands]
+
+| Command                                     | Permission    | Description                                                                                                      |
+| ------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `/givekey [id] [plate]` (alias `/givekeys`) | `group.admin` | Give a key. Defaults to yourself and your current vehicle. Plates may contain spaces. Works for stored vehicles. |
+| `/givejobkey <job> [plate]`                 | `group.admin` | Give a job access to a spawned vehicle                                                                           |
+| `/keyadmin`                                 | `group.admin` | Open the admin panel                                                                                             |
+
 ## SQL Table [#sql-table]
 
-The following table is created automatically. You do not need to run this manually.
+Created automatically on first boot. Only player-owned vehicles are written, and records
+inactive for `Config.VehicleDataRetentionMonths` are pruned.
 
 ```sql
 CREATE TABLE IF NOT EXISTS `filo_vehiclekeys` (
@@ -61,65 +168,3 @@ CREATE TABLE IF NOT EXISTS `filo_vehiclekeys` (
     PRIMARY KEY (`plate`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
-
-Inactive vehicle records are pruned automatically based on the `VehicleDataRetentionMonths`
-config value. Only vehicles owned by a player are ever written to the table.
-
-## Items [#items]
-
-If you are using `ox_inventory`, add the following to your `items.lua`:
-
-```lua
-["vehiclekey"] = {
-    label = "Vehicle Key",
-    weight = 10,
-    width = 1,
-    height = 1,
-    stack = false,
-    close = true,
-},
-["locksmith_tablet"] = {
-    label = "Locksmith Tablet",
-    weight = 150,
-    width = 1,
-    height = 1,
-    close = true,
-},
-["key_cutting_tool"] = {
-    label = "Key Cutting Tool",
-    weight = 100,
-    width = 1,
-    height = 1,
-    close = true,
-},
-["blank_key"] = {
-    label = "Blank Key",
-    weight = 50,
-    width = 1,
-    height = 1,
-    close = true,
-},
-["electrical_tools"] = {
-    label = "Electrical Tools",
-    weight = 10,
-    width = 1,
-    height = 1,
-    stack = false,
-    close = true,
-},
-```
-
-Then update your `Config.Locksmith.Items` to match the item names you defined:
-
-```lua
-Config.Locksmith.Items = {
-    BlankKey       = 'blank_key',
-    KeyCuttingTool = 'key_cutting_tool',
-    OBD            = 'locksmith_tablet',
-}
-```
-
-<Callout type="info">
-  `vehiclekey` and `electrical_tools` have `stack = false` — each key is a unique item
-  with its own metadata (plate, key ID, model info) so stacking must be disabled.
-</Callout>

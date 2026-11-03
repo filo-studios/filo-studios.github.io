@@ -4,163 +4,66 @@
 
 
 
-## Mechanical Key Cutting [#mechanical-key-cutting]
+## Lockpicking & Hotwiring [#lockpicking--hotwiring]
 
-Used for non-electric vehicles. Can be triggered in two ways.
+Every attempt resolves to a difficulty tier (`easy` / `medium` / `hard` / `expert`) from
+`ModelDifficulty`, then `VehicleClassDifficulty`, then `DefaultDifficulty`.
 
-### From the Key Cutting Station [#from-the-key-cutting-station]
+* **Lockpick:** use `lockpick` or `advanced_lockpick` near a locked vehicle. Pass the minigame, then the server rolls the tier's chance. Tools lose durability and may trigger the alarm.
+* **Hotwire:** press `H` in a vehicle you have no key for, with `Config.Hotwire.HotwireItem`. A progress bar runs for the tier's time, then the minigame at the tier's level, then the server rolls the chance.
+* **Search:** press `Y` in a parked vehicle to search for its key (`Config.KeySearching`).
 
-Target zone or textui interaction at configured `Interactions` coordinates.
-Opens a menu listing all vehicle keys currently in the locksmith's inventory.
-
-**Requirements:**
-
-* Locksmith job, on duty
-* At least one `vehiclekey` item in inventory
-* `BlankKey` item in inventory
-
-<Steps>
-  <Step>
-    Approach the key cutting bench and interact with it.
-  </Step>
-
-  <Step>
-    Select a key from your inventory to duplicate.
-  </Step>
-
-  <Step>
-    Choose whether to invalidate the owner's existing key.
-  </Step>
-
-  <Step>
-    Complete the minigame and progress bar.
-  </Step>
-
-  <Step>
-    A duplicate key is added to your inventory. The blank key is consumed.
-  </Step>
-</Steps>
-
-### From the Key Cutting Tool Item [#from-the-key-cutting-tool-item]
-
-Using the `KeyCuttingTool` item opens a combined menu of:
-
-* Keys in the locksmith's inventory (non-keyless only)
-* Any non-electric vehicles within `KeyCuttingDistance` metres
-
-This allows duplication without needing the owner's physical key, as long as their vehicle
-is present.
-
-**Requirements:**
-
-* Locksmith job, on duty
-* `BlankKey` and `KeyCuttingTool` in inventory
+Models in `Config.Blacklist.Models` can't be lockpicked, hotwired or carjacked (per action).
 
 <Callout type="info">
-  If a vehicle is both in the locksmith's inventory and physically nearby, it only appears
-  once in the menu — sourced from the inventory entry.
+  With `Config.Minigames = 'tr_minigames'`, tr\_minigames handles these flows. See
+  [Compatibility](/docs/filo_vehiclekeys/compatibility#tr_minigames).
 </Callout>
 
-***
+## Carjacking [#carjacking]
 
-## OBD Key Fob Programming [#obd-key-fob-programming]
+Aim a gun at an NPC driver within `Distance` of a car slower than `MaxSpeed`. The driver brakes and
+a progress bar starts; it cancels if you stop aiming or move away.
 
-Used exclusively for electric vehicles. Triggered by using the `OBD` scanner item.
+* **Success:** the driver gets out and runs, the car unlocks, you get its key and police are alerted.
+* **Failure:** the driver drives off or fights back (`FailBehavior`).
 
-The locksmith connects the scanner under the dash, reads the vehicle's key programming, and
-writes it to a blank key fob.
+The aim check only runs while a weapon is drawn. Each player has a `Cooldown` between attempts.
 
-**Requirements:**
+## Police [#police]
 
-* Locksmith job, on duty
-* Seated in the **driver's seat** of an electric vehicle
-* `BlankKey` and `OBD` scanner in inventory
+Jobs in `Config.PoliceBypass.Jobs` (at the minimum grade, on duty, and carrying `police_bypass` if
+set) can lock, unlock, insert the ignition and start the engine on any vehicle. With
+`UseItemToUnlock`, using the item unlocks the closest vehicle. Carjacking a blacklisted vehicle
+with the bypass is allowed and sends no dispatch.
 
-<Steps>
-  <Step>
-    Enter and sit in the driver's seat of an electric vehicle.
-  </Step>
+Successful lockpicks, hotwires and carjacks send a dispatch alert based on `Config.Dispatch.Chance`.
 
-  <Step>
-    Use the OBD scanner item from your inventory.
-  </Step>
+## Locksmith [#locksmith]
 
-  <Step>
-    Confirm the programming prompt and choose whether to invalidate the existing fob.
-  </Step>
+* **Key cutting:** at a key cutting station or with the `key_cutting_tool`. Copies a key from the locksmith's inventory or a nearby vehicle. Uses a `blank_key`.
+* **OBD programming:** for keyless vehicles. The locksmith sits in the driver's seat and uses the `locksmith_tablet`.
+* **Invalidate old keys:** optional when making a key. Generates a new key ID so every old copy stops working.
+* **NPC store:** when `OfflineStore.MininumDuty` or fewer locksmiths are on duty, players can buy spare keys for vehicles they own. Prices are enforced on the server.
+* **Ignition repair:** use `electrical_tools` in a hotwired vehicle to clear the hotwire. Only needed when `Config.Hotwire.SaveHotwireState` is on.
 
-  <Step>
-    A timed animation plays for `OBDConnectDuration` milliseconds while the scanner reads
-    the key data.
+## Admin Panel [#admin-panel]
 
-    <Callout type="warn">
-      Leaving the driver's seat during this window cancels the process immediately.
-    </Callout>
-  </Step>
+`/keyadmin` lists stored and spawned vehicles (spawned ones have a green dot). For each vehicle you can:
 
-  <Step>
-    Complete the minigame.
-  </Step>
+* toggle keyless, keys-in-ignition, engine-on and hotwired
+* add or remove jobs with access
+* regenerate the key ID, making every existing key useless
+* give a key to an online player
+* delete the stored record
 
-  <Step>
-    A programmed key fob is added to your inventory. The blank key and OBD scanner are consumed.
-  </Step>
-</Steps>
+Every action is checked on the server against the `command.keyadmin` permission.
 
-***
+## Key Validation [#key-validation]
 
-## NPC Locksmith [#npc-locksmith]
+A key item is valid when its plate and key ID match the vehicle's current key ID. The server keeps
+that ID on the spawned vehicle, or in the `filo_vehiclekeys` table for owned vehicles that aren't
+spawned. Checks never trust client data.
 
-When the number of on-duty locksmiths is at or below `Config.Locksmith.OfflineStore.MininumDuty`,
-NPC peds spawn at each configured location in `OfflineStore.Locations`.
-
-Players can purchase spare keys directly from the NPC without a locksmith player present.
-
-**Pricing:**
-
-* Standard mechanical key — `OfflineStore.Prices.Mechanical`
-* Wireless key fob (electric vehicles) — `OfflineStore.Prices.Wireless`
-
-The NPC menu lists all vehicles owned by the interacting player. The player can choose
-whether to invalidate their existing key when purchasing a spare.
-
-<Callout type="info">
-  NPC peds are automatically removed when a locksmith comes on duty, and re-spawned when
-  the last locksmith goes off duty or disconnects. This is handled in real time via a
-  GlobalState handler — no restart required.
-</Callout>
-
-***
-
-## Key Invalidation [#key-invalidation]
-
-Every duplication flow asks whether to invalidate the existing key. This is relevant when:
-
-* A vehicle was stolen and the owner wants their key to stop working
-* A locksmith is cutting a key for a customer who lost theirs
-
-When invalidated:
-
-* A new `keyId` is generated and written to the vehicle data
-* If the vehicle is currently spawned, statebags are updated immediately so the old key
-  stops working in the active session
-* The owner's existing `vehiclekey` item becomes invalid as its stored `id` no longer
-  matches the vehicle's current `keyId`
-
-When not invalidated:
-
-* The duplicate is cut with the same `keyId` as the existing key
-* Both keys work simultaneously
-
-***
-
-## Minigame [#minigame]
-
-All duplication flows use the same minigame sequence:
-
-1. `exports.minigames:Play('locksmith', { difficulty = 3 })` — the skill check
-2. `lib.progressBar` — a timed progress bar (5–10 seconds, randomly) representing the
-   physical cutting or programming work
-
-Cancelling the progress bar or failing the minigame aborts the flow with no item consumption
-— except for the OBD flow, where the animation has already played.
+Keys for unowned vehicles (NPC, stolen or job cars) are removed when the vehicle is deleted and
+after a server restart (`Config.KeyCleanup`). Player-owned vehicles always keep their keys.

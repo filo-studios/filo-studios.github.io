@@ -2,192 +2,42 @@
 
 
 
+
+
 ## Server [#server]
 
-### `GiveKeys` [#givekeys]
-
-Give a player a key item for a vehicle.
+`target` can be a plate, network ID or entity.
 
 ```lua
-exports.filo_vehiclekeys:GiveKeys(source --[[number]], vehicle --[[entity]])
+exports.filo_vehiclekeys:GiveKeys(source, target, forceGive, invalidateOldKey)
+exports.filo_vehiclekeys:RemoveKeys(source, target)
+exports.filo_vehiclekeys:GiveJobKeys(plate, job)
+exports.filo_vehiclekeys:RemoveJobKeys(plate, job)
+exports.filo_vehiclekeys:SetKeysInIgnition(plate, keysInIgnition, canRemove)
+exports.filo_vehiclekeys:SetLockState(vehicle, locked) -- boolean, or 2 = locked / 1 = unlocked
+exports.filo_vehiclekeys:HasVehicleAccess(source, vehicle) -- keys, job keys or police bypass
 ```
-
-***
-
-### `GiveKeysByPlate` [#givekeysbyplate]
-
-Give a player a key item by plate string directly.
-
-```lua
-exports.filo_vehiclekeys:GiveKeysByPlate(source --[[number]], plate --[[string]])
-```
-
-***
-
-### `RemoveKeys` [#removekeys]
-
-Remove a player's key item for a vehicle.
-
-```lua
-exports.filo_vehiclekeys:RemoveKeys(source --[[number]], vehicle --[[entity]])
-```
-
-***
-
-### `RemoveKeysByPlate` [#removekeysbyplate]
-
-```lua
-exports.filo_vehiclekeys:RemoveKeysByPlate(source --[[number]], plate --[[string]])
-```
-
-***
-
-### `GiveJobKeys` [#givejobkeys]
-
-Grant job-restricted access to a vehicle. Does not give a physical key item — access is
-checked at runtime against the player's current job.
-
-```lua
-exports.filo_vehiclekeys:GiveJobKeys(plate --[[string]], job --[[string]])
-```
-
-***
-
-### `RemoveJobKeys` [#removejobkeys]
-
-```lua
-exports.filo_vehiclekeys:RemoveJobKeys(plate --[[string]], job --[[string]])
-```
-
-***
-
-### `SetKeysInIgnition` [#setkeysinignition]
-
-Set whether keys are currently in the ignition for a vehicle. Used to grant temporary
-access without giving a permanent key item.
-
-```lua
-exports.filo_vehiclekeys:SetKeysInIgnition(
-    plate         --[[string]],
-    keysInIgnition --[[boolean]],
-    canRemove     --[[boolean]]  -- whether the player can physically remove the keys
-)
-```
-
-***
-
-### `IsKeysInIgnition` [#iskeysinignition]
-
-Check whether keys are currently in the ignition for a vehicle.
-
-```lua
-local keysInIgnition = exports.filo_vehiclekeys:IsKeysInIgnition(entity --[[entity|netId]])
-```
-
-***
-
-### `SetLockState` [#setlockstate]
-
-Directly set the lock state of a vehicle by net ID.
-
-```lua
-exports.filo_vehiclekeys:SetLockState(netId --[[number]], state --[[boolean]])
-```
-
-***
 
 ## Client [#client]
 
-### `GiveKeys` [#givekeys-1]
-
-Give the local player a key for a vehicle entity.
-
 ```lua
-exports.filo_vehiclekeys:GiveKeys(vehicle --[[entity]])
-exports.filo_vehiclekeys:GiveKeysByPlate(plate --[[string]])
+exports.filo_vehiclekeys:GiveKeys(vehicle, invalidateOldKey)
+exports.filo_vehiclekeys:GiveKeysByPlate(plate, invalidateOldKey)
+exports.filo_vehiclekeys:RemoveKeys(vehicle)
+exports.filo_vehiclekeys:RemoveKeysByPlate(plate)
+
+exports.filo_vehiclekeys:HasKeys(vehicle)
+exports.filo_vehiclekeys:HasKeysByPlate(plate)
+exports.filo_vehiclekeys:HasJobKeys(vehicle)
+exports.filo_vehiclekeys:HasJobKeysByPlate(plate)
+exports.filo_vehiclekeys:HasVehicleAccess(vehicle) -- keys, job keys or police bypass
+exports.filo_vehiclekeys:HasPoliceBypass()
+
+exports.filo_vehiclekeys:GiveJobKeys(vehicle, job)
+exports.filo_vehiclekeys:RemoveJobKeys(vehicle, job)
+exports.filo_vehiclekeys:SetKeysInIgnition(plate, keysInIgnition, canRemove)
 ```
 
-***
-
-### `RemoveKeys` [#removekeys-1]
-
-Remove the local player's key for a vehicle.
-
-```lua
-exports.filo_vehiclekeys:RemoveKeys(vehicle --[[entity]])
-exports.filo_vehiclekeys:RemoveKeysByPlate(plate --[[string]])
-```
-
-***
-
-### `HasKeys` [#haskeys]
-
-Returns the key item if the local player has a valid key for the vehicle, or `false`.
-
-```lua
-local key = exports.filo_vehiclekeys:HasKeys(vehicle --[[entity]])
-local key = exports.filo_vehiclekeys:HasKeysByPlate(plate --[[string]])
-```
-
-***
-
-### `HasJobKeys` [#hasjobkeys]
-
-Returns `true` if the local player's current job grants access to the vehicle.
-
-```lua
-local hasAccess = exports.filo_vehiclekeys:HasJobKeys(vehicle --[[entity]])
-local hasAccess = exports.filo_vehiclekeys:HasJobKeysByPlate(plate --[[string]])
-```
-
-***
-
-### `GiveJobKeys` [#givejobkeys-1]
-
-```lua
-exports.filo_vehiclekeys:GiveJobKeys(vehicle --[[entity]], job --[[string]])
-exports.filo_vehiclekeys:GiveJobKeysByPlate(plate --[[string]], job --[[string]])
-```
-
-***
-
-### `RemoveJobKeys` [#removejobkeys-1]
-
-```lua
-exports.filo_vehiclekeys:RemoveJobKeys(vehicle --[[entity]], job --[[string]])
-exports.filo_vehiclekeys:RemoveJobKeysByPlate(plate --[[string]], job --[[string]])
-```
-
-***
-
-### `SetKeysInIgnition` [#setkeysinignition-1]
-
-```lua
-exports.filo_vehiclekeys:SetKeysInIgnition(
-    plate          --[[string]],
-    keysInIgnition --[[boolean]],
-    canRemove      --[[boolean]]
-)
-```
-
-***
-
-### `IsKeysInIgnition` [#iskeysinignition-1]
-
-Check whether keys are currently in the ignition for a vehicle.
-
-```lua
-local keysInIgnition = exports.filo_vehiclekeys:IsKeysInIgnition(entity --[[entity|netId]])
-```
-
-Shorthand helpers:
-
-```lua
--- Insert keys into ignition (canRemove = false)
-exports.filo_vehiclekeys:GiveTempKeys(vehicle --[[entity]])
-exports.filo_vehiclekeys:GiveTempKeysByPlate(plate --[[string]])
-
--- Remove temp keys
-exports.filo_vehiclekeys:RemoveTempKeys(vehicle --[[entity]])
-exports.filo_vehiclekeys:RemoveTempKeysByPlate(plate --[[string]])
-```
+<Callout type="info">
+  `StartEngineWithoutKeys` is also exported for tr\_core's key bridge. You don't need to call it yourself.
+</Callout>

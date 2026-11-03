@@ -38,9 +38,9 @@
     - [HideText](/docs/free_resources/filo_textui/hide-text): Hide the 2D bottom bar prompt.
 - Paid Resources: My collection of paid resources
   - 🔑 filo_vehiclekeys
-    - [🔑 filo_vehiclekeys](/docs/paid_resources/filo_vehiclekeys): A fully refactored vehicle key management and locksmith system for FiveM.
-    - [Installation](/docs/paid_resources/filo_vehiclekeys/installation): Dependencies, setup steps, and migration from the legacy BIN format.
-    - [Compatibility](/docs/paid_resources/filo_vehiclekeys/compatibility): Drop-in support for qb-vehiclekeys, and qbx_vehiclekeys.
-    - [Configuration](/docs/paid_resources/filo_vehiclekeys/configuration): Full breakdown of every config option available in filo_vehiclekeys.
+    - [🔑 filo_vehiclekeys](/docs/paid_resources/filo_vehiclekeys): Item-based vehicle keys, theft, police and locksmith system for FiveM.
+    - [Installation](/docs/paid_resources/filo_vehiclekeys/installation): Dependencies, items, controls and commands.
+    - [Compatibility](/docs/paid_resources/filo_vehiclekeys/compatibility): qb-vehiclekeys, qbx_vehiclekeys, tr_minigames and the open bridge.
+    - [Configuration](/docs/paid_resources/filo_vehiclekeys/configuration): Every config section in shared/sh-config.lua explained.
     - [Exports](/docs/paid_resources/filo_vehiclekeys/exports): Client and server exports provided by filo_vehiclekeys for use in other resources.
-    - [Flows](/docs/paid_resources/filo_vehiclekeys/flows): How mechanical key cutting, OBD fob programming, and the NPC locksmith store work.
+    - [Flows](/docs/paid_resources/filo_vehiclekeys/flows): Theft, carjacking, police, locksmith, admin panel and how keys are validated.

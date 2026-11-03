@@ -387,194 +387,6 @@ Before installing, make sure the following resource is running on your server:
 </Callout>
 
 
-# Configuration (/docs/free_resources/filo_jack/configuration)
-
-
-
-Open:
-
-```
-shared/sh-config.lua
-```
-
-## Debug [#debug]
-
-```lua
-Config.Debug = false
-```
-
-Enable console debugging.
-
-***
-
-## Allowed Jobs [#allowed-jobs]
-
-```lua
-Config.JobsAllowed = {
-    "mechanic",
-}
-```
-
-Set to `nil` to allow everyone.
-
-Example:
-
-```lua
-Config.JobsAllowed = nil
-```
-
-***
-
-## Required Item [#required-item]
-
-```lua
-Config.RequiredItem = "vehicle_jack"
-```
-
-Set to `nil` to disable the inventory requirement.
-
-```lua
-Config.RequiredItem = nil
-```
-
-
-# Exports (/docs/free_resources/filo_jack/exports)
-
-
-
-## IsLifted [#islifted]
-
-Checks whether a vehicle has been fully lifted.
-
-### Client [#client]
-
-```lua
-local lifted = exports.filo_jack:IsLifted(vehicle)
-```
-
-Specify a side.
-
-```lua
-local lifted = exports.filo_jack:IsLifted(vehicle, "left")
-```
-
-### Parameters [#parameters]
-
-| Name   | Type   | Description                      |
-| ------ | ------ | -------------------------------- |
-| entity | number | Vehicle entity                   |
-| side   | string | `"left"` or `"right"` (optional) |
-
-### Returns [#returns]
-
-```lua
-boolean
-```
-
-
-# filo_jack (/docs/free_resources/filo_jack)
-
-
-
-A realistic **FiveM vehicle jack** that allows players to physically lift either side of a vehicle using floor jacks.
-
-## Features [#features]
-
-* Lift either the left or right side independently
-* Realistic pump-by-pump animation
-* Accurate vehicle roll geometry
-* Automatic height compensation
-* Support for jacking both sides simultaneously
-* Export available for detecting lifted vehicles
-
-## Requirements [#requirements]
-
-* [ox\_lib](https://github.com/overextended/ox_lib)
-* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
-
-Continue with the installation guide to get started.
-
-
-# Installation (/docs/free_resources/filo_jack/installation)
-
-
-
-## 1. Install the resource [#1-install-the-resource]
-
-Place the resource inside your server's resources folder.
-
-```
-resources/
-    filo_jack/
-```
-
-## 2. Ensure the resource [#2-ensure-the-resource]
-
-Add the following to your `server.cfg`.
-
-```
-ensure ox_lib
-
-# ensure frameworkName [qbx_core/qb-core]
-
-ensure community_bridge
-ensure filo_jack
-```
-
-## 3. Install dependencies [#3-install-dependencies]
-
-Required:
-
-* [ox\_lib](https://github.com/overextended/ox_lib)
-* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
-
-## 4. Inventory Item [#4-inventory-item]
-
-Create the following inventory item.
-
-```
-['vehicle_jack'] = {
-    label = 'Vehicle Jack',
-    weight = 500,
-},
-```
-
-An item image is included inside:
-
-```
-INSTALL/item images/
-```
-
-## 5. Restart the server [#5-restart-the-server]
-
-Once installed, restart your server.
-
-
-# Usage (/docs/free_resources/filo_jack/usage)
-
-
-
-Approach either side of a vehicle.
-
-Available interactions include:
-
-| Action              | Description                    |
-| ------------------- | ------------------------------ |
-| Attach Jack (Left)  | Place a jack on the left side  |
-| Attach Jack (Right) | Place a jack on the right side |
-| Pump Jack (Left)    | Raise the left side            |
-| Pump Jack (Right)   | Raise the right side           |
-| Detach Jack (Left)  | Remove the left jack           |
-| Detach Jack (Right) | Remove the right jack          |
-
-## Notes [#notes]
-
-* Players must be close to the vehicle.
-* Players must stand on the correct side.
-* Both sides may be lifted independently.
-* Removing one jack correctly preserves the remaining side.
-
-
 # filo_slashtire (/docs/free_resources/filo_slashtire)
 
 
@@ -1226,55 +1038,265 @@ end
 ```
 
 
+# Configuration (/docs/free_resources/filo_jack/configuration)
+
+
+
+Open:
+
+```
+shared/sh-config.lua
+```
+
+## Debug [#debug]
+
+```lua
+Config.Debug = false
+```
+
+Enable console debugging.
+
+***
+
+## Allowed Jobs [#allowed-jobs]
+
+```lua
+Config.JobsAllowed = {
+    "mechanic",
+}
+```
+
+Set to `nil` to allow everyone.
+
+Example:
+
+```lua
+Config.JobsAllowed = nil
+```
+
+***
+
+## Required Item [#required-item]
+
+```lua
+Config.RequiredItem = "vehicle_jack"
+```
+
+Set to `nil` to disable the inventory requirement.
+
+```lua
+Config.RequiredItem = nil
+```
+
+
+# Exports (/docs/free_resources/filo_jack/exports)
+
+
+
+## IsLifted [#islifted]
+
+Checks whether a vehicle has been fully lifted.
+
+### Client [#client]
+
+```lua
+local lifted = exports.filo_jack:IsLifted(vehicle)
+```
+
+Specify a side.
+
+```lua
+local lifted = exports.filo_jack:IsLifted(vehicle, "left")
+```
+
+### Parameters [#parameters]
+
+| Name   | Type   | Description                      |
+| ------ | ------ | -------------------------------- |
+| entity | number | Vehicle entity                   |
+| side   | string | `"left"` or `"right"` (optional) |
+
+### Returns [#returns]
+
+```lua
+boolean
+```
+
+
+# filo_jack (/docs/free_resources/filo_jack)
+
+
+
+A realistic **FiveM vehicle jack** that allows players to physically lift either side of a vehicle using floor jacks.
+
+## Features [#features]
+
+* Lift either the left or right side independently
+* Realistic pump-by-pump animation
+* Accurate vehicle roll geometry
+* Automatic height compensation
+* Support for jacking both sides simultaneously
+* Export available for detecting lifted vehicles
+
+## Requirements [#requirements]
+
+* [ox\_lib](https://github.com/overextended/ox_lib)
+* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
+
+Continue with the installation guide to get started.
+
+
+# Installation (/docs/free_resources/filo_jack/installation)
+
+
+
+## 1. Install the resource [#1-install-the-resource]
+
+Place the resource inside your server's resources folder.
+
+```
+resources/
+    filo_jack/
+```
+
+## 2. Ensure the resource [#2-ensure-the-resource]
+
+Add the following to your `server.cfg`.
+
+```
+ensure ox_lib
+
+# ensure frameworkName [qbx_core/qb-core]
+
+ensure community_bridge
+ensure filo_jack
+```
+
+## 3. Install dependencies [#3-install-dependencies]
+
+Required:
+
+* [ox\_lib](https://github.com/overextended/ox_lib)
+* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
+
+## 4. Inventory Item [#4-inventory-item]
+
+Create the following inventory item.
+
+```
+['vehicle_jack'] = {
+    label = 'Vehicle Jack',
+    weight = 500,
+},
+```
+
+An item image is included inside:
+
+```
+INSTALL/item images/
+```
+
+## 5. Restart the server [#5-restart-the-server]
+
+Once installed, restart your server.
+
+
+# Usage (/docs/free_resources/filo_jack/usage)
+
+
+
+Approach either side of a vehicle.
+
+Available interactions include:
+
+| Action              | Description                    |
+| ------------------- | ------------------------------ |
+| Attach Jack (Left)  | Place a jack on the left side  |
+| Attach Jack (Right) | Place a jack on the right side |
+| Pump Jack (Left)    | Raise the left side            |
+| Pump Jack (Right)   | Raise the right side           |
+| Detach Jack (Left)  | Remove the left jack           |
+| Detach Jack (Right) | Remove the right jack          |
+
+## Notes [#notes]
+
+* Players must be close to the vehicle.
+* Players must stand on the correct side.
+* Both sides may be lifted independently.
+* Removing one jack correctly preserves the remaining side.
+
+
 # Compatibility (/docs/paid_resources/filo_vehiclekeys/compatibility)
 
 
 
 
 
-`filo_vehiclekeys` includes built-in compatibility layers for common vehicle key resources.
-Existing scripts that target these resources will continue to work without modification.
+## qb-vehiclekeys & qbx\_vehiclekeys [#qb-vehiclekeys--qbx_vehiclekeys]
 
-## qb-vehiclekeys [#qb-vehiclekeys]
-
-The following net event is handled:
+`filo_vehiclekeys` provides `qb-vehiclekeys`, `qbx_vehiclekeys` and `filo_vehiclekey` (v1), so
+garages and job scripts that use them keep working without changes.
 
 ```lua
+-- qb-vehiclekeys
 TriggerServerEvent('qb-vehiclekeys:server:AcquireVehicleKeys', plate)
-```
+TriggerEvent('vehiclekeys:client:SetOwner', plate)
 
-Internally maps to `GiveKey(source, plate)`.
-
-***
-
-## qbx\_vehiclekeys [#qbx_vehiclekeys]
-
-The following callback and exports are supported:
-
-```lua
--- Callback
-lib.callback('qbx_vehiclekeys:server:giveKeys', source, netId)
-
--- Server exports
+-- qbx_vehiclekeys
+lib.callback.await('qbx_vehiclekeys:server:giveKeys', false, netId)
 exports.qbx_vehiclekeys:GiveKeys(source, vehicle)
 exports.qbx_vehiclekeys:RemoveKeys(source, vehicle)
-exports.qbx_vehiclekeys:SetLockState(netId, state)
-
--- Client export
-exports.qbx_vehiclekeys:HasKeys(vehicle) -- returns boolean
+exports.qbx_vehiclekeys:SetLockState(vehicle, state)
+exports.qbx_vehiclekeys:HasKeys(vehicle) -- client
 ```
 
-***
+## tr\_minigames [#tr_minigames]
 
-<Callout type="info">
-  Compatibility shims are handled in `cl-compatibility.lua` and `sv-compatibility.lua`.
-  If you need to add support for another resource, those are the files to extend.
-</Callout>
+Set `Config.Minigames = 'tr_minigames'` to use tr\_minigames' physical lockpick and hotwire.
+filo\_vehiclekeys stays in charge of input and prompts; tr\_minigames runs the minigame and decides
+the outcome.
+
+* **Hotwire:** the hotwire key (`H`) and prompt start tr\_minigames' hotwire. The prompt only shows when you have no key and carry `Config.TrMinigames.HotwireItem`.
+* **Lockpick:** using the `lockpick` item starts tr\_minigames' lockpick. A successful pick unlocks the car.
+* **After a hotwire:** the car is marked hotwired and runs without a key being handed out.
+* **Access checks:** tr\_minigames asks filo\_vehiclekeys through `HasVehicleAccess`. Keys, job keys and the police bypass all count.
+
+The `tr_core` and `tr_minigames` folders in the download are pre-configured (`keys = 'filo_vehiclekeys'`,
+their own prompts, target option and keybinds off). Ensure them **after** `filo_vehiclekeys`:
+
+```
+ensure filo_vehiclekeys
+ensure tr_core
+ensure tr_minigames
+```
 
 <Callout type="warn">
-  Compatibility is provided on a best-effort basis. If the target resource has updated its
-  API since this was written, open a ticket in the
-  [Discord](https://discord.gg/bErPEKvRXg) and it will be patched.
+  In this mode, difficulty, class tiers, alarms and lockpick/hotwire alerts come from tr\_minigames'
+  own config. `Config.Blacklist` is still checked before a hotwire starts, but copy the models into
+  tr\_minigames' `excludeModels` too. Keep `Config.TrMinigames.HotwireItem` equal to tr\_minigames'
+  `Config.hotwire.item` (default `wire_strippers`).
+</Callout>
+
+## Editing the bridge [#editing-the-bridge]
+
+Everything that depends on another resource lives in `bridge/` and stays open when escrowed.
+
+| File                                             | What it contains                                                                |
+| ------------------------------------------------ | ------------------------------------------------------------------------------- |
+| `bridge/framework/client.lua` / `server.lua`     | Player job, money, owned vehicles, usable items, vehicle names                  |
+| `bridge/inventory/client.lua` / `server.lua`     | Item checks, adding/removing items, durability, inventory reads                 |
+| `bridge/minigames/client.lua`                    | Hotwire, lockpick, search and wiring minigames (each returns true on pass)      |
+| `bridge/minigames/server.lua`                    | Syncs results from tr\_minigames into the key state                             |
+| `bridge/dispatch/client.lua`                     | ps-dispatch, builtin and custom dispatch                                        |
+| `bridge/target/client.lua`                       | Lock/unlock target options on vehicles                                          |
+| `bridge/compatibility/client.lua` / `server.lua` | qb/qbx shims, plus `HasVehicleAccess` and `StartEngineWithoutKeys` for tr\_core |
+
+To support another framework or inventory, change the function bodies and keep the function
+names: the rest of the resource calls them by name.
+
+<Callout type="info">
+  Something broken after a third-party update? Open a ticket in the
+  [Discord](https://discord.gg/EWKWXVBHK7).
 </Callout>
 
 
@@ -1284,137 +1306,218 @@ exports.qbx_vehiclekeys:HasKeys(vehicle) -- returns boolean
 
 
 
+All options live in `shared/sh-config.lua` (kept open when escrowed) and are commented inline.
+
 ## General [#general]
 
 ```lua
-Config.InteractionType = 'target'   -- 'target' or 'textui'
+Config.Debug = false
+Config.InteractionType = 'prompts'  -- 'target' (ox_target) or 'prompts' (sleepless_prompts)
+Config.Minigames = 'tr_minigames'   -- 'builtin' (Config.Difficulty + eye_minigames) or 'tr_minigames'
+Config.TrMinigames = {
+    HotwireItem = 'wire_strippers', -- match Config.hotwire.item in tr_minigames
+    HotwireCommand = 'hotwire',
+}
+Config.PromptPosition = 'bottom-center'
 
-Config.LockDistance    = 5.0        -- Distance (metres) the lock keybind scans for vehicles
-Config.KeyfobDistance  = 15.0       -- Distance (metres) the keyfob scans for the target vehicle
+Config.DefaultKeybinds = { Lock = 'L', Ignition = 'G', Engine = 'M', Hotwire = 'H', Search = 'Y' }
+Config.HoldingIgnitionWillToggleEngine = true
+```
 
-Config.VehicleDataRetentionMonths = 3  -- Inactive vehicle records older than this are pruned
+## Data & Key Cleanup [#data--key-cleanup]
 
-Config.AutoDriveSpeed       = 5.0      -- Speed used when summoning a vehicle via keyfob
-Config.AutoDriveDrivingFlag = 786603   -- TaskVehicleDriveToCoord driving flag for summon
+```lua
+Config.KeyCleanup = {
+    Enabled = true,
+    RemovedGraceSeconds = 5, -- wait after deletion, in case the vehicle respawns with the same plate
+}
+Config.VehicleDataRetentionMonths = 3
+```
+
+Keys for vehicles nobody owns are removed when the vehicle is deleted and after a server restart.
+Player-owned vehicles always keep their keys.
+
+## Keyfob & World Vehicles [#keyfob--world-vehicles]
+
+```lua
+Config.KeyfobDistance = 100.0
+Config.AutoDriveDrivingFlag = 786603
+Config.AutoDriveSpeed = 3.0
+
+Config.JobKeys = true                   -- give keys for vehicles spawned by job scripts
+Config.LockNPCVehicles = true
+Config.LockParkedVehicles = true
+Config.LockedVehiclesChance = 0.5
+Config.DisableLeaveOnLockedDoors = true
+```
+
+## Hotwire, Lockpick & Search [#hotwire-lockpick--search]
+
+```lua
+Config.Hotwire = {
+    Enabled = true,
+    SaveHotwireState = true,          -- hotwire persists until the ignition is repaired
+    Fixing = { Item = 'electrical_tools', SuccessDurabilityDecrease = 0.1, FailDurabilityDecrease = 0.25 },
+    HotwireItem = 'electrical_tools', -- nil for no item
+    SuccessDurabilityDecrease = 0.1,
+    FailDurabilityDecrease = 0.25,
+    AlarmChance = 0.6,
+}
+
+Config.Lockpick = {
+    Enabled = true, Item = 'lockpick',
+    SuccessDurabilityDecrease = 0.1, FailDurabilityDecrease = 0.25, AlarmChance = 0.6,
+}
+
+Config.AdvancedLockpick = {
+    Enabled = true, Item = 'advanced_lockpick',
+    SuccessDurabilityDecrease = 0.05, FailDurabilityDecrease = 0.1, AlarmChance = 0.3,
+}
+
+Config.KeySearching = { Enabled = true, Duration = 10, SearchingChance = 0.5 }
+```
+
+## Keyless System [#keyless-system]
+
+```lua
+Config.KeylessSystem = {
+    Enabled = true,
+    AutomaticallyDetectElectricModels = true,
+    Models = { `neon` }, -- manual overrides
+}
+```
+
+## Difficulty [#difficulty]
+
+Used by the built-in flow. Lookup order: `ModelDifficulty` (by model name), then
+`VehicleClassDifficulty` (by GTA class ID), then `DefaultDifficulty`.
+
+```lua
+Config.Difficulty = {
+    DefaultDifficulty = 'medium',
+    HotwireTimes   = { easy = 35000, medium = 28000, hard = 22000, expert = 18000 }, -- ms
+    LockpickChance = { easy = 0.9, medium = 0.75, hard = 0.55, expert = 0.35 },
+    AdvancedLockpickChance = { easy = 1.0, medium = 0.9, hard = 0.75, expert = 0.55 },
+    HotwireChance  = { easy = 0.9, medium = 0.75, hard = 0.55, expert = 0.35 },
+    MinigameLevel  = { easy = 1, medium = 2, hard = 3, expert = 4 },
+    VehicleClassDifficulty = { [0] = 'easy', [7] = 'expert', --[[ ... ]] },
+    ModelDifficulty = { ['adder'] = 'expert' },
+}
+```
+
+<Callout type="info">
+  Passing the minigame is not enough on its own: the server then rolls the tier's chance.
+</Callout>
+
+<details>
+  <summary>
+    GTA vehicle class IDs
+  </summary>
+
+  | ID | Class           | ID | Class       |
+  | -- | --------------- | -- | ----------- |
+  | 0  | Compacts        | 11 | Utility     |
+  | 1  | Sedans          | 12 | Vans        |
+  | 2  | SUVs            | 13 | Cycles      |
+  | 3  | Coupes          | 14 | Boats       |
+  | 4  | Muscle          | 15 | Helicopters |
+  | 5  | Sports Classics | 16 | Planes      |
+  | 6  | Sports          | 17 | Service     |
+  | 7  | Super           | 18 | Emergency   |
+  | 8  | Motorcycles     | 19 | Military    |
+  | 9  | Off-road        | 20 | Commercial  |
+  | 10 | Industrial      | 21 | Trains      |
+</details>
+
+## Blacklist [#blacklist]
+
+```lua
+Config.Blacklist = {
+    Lockpick = true, -- set an action to false to allow it on blacklisted models
+    Hotwire = true,
+    Carjack = true,
+    Models = { ['police'] = true, ['police2'] = true },
+}
+```
+
+## Police Bypass [#police-bypass]
+
+```lua
+Config.PoliceBypass = {
+    Enabled = true,
+    RequireDuty = true,
+    Jobs = { ['police'] = 0, ['sheriff'] = 0 }, -- job = minimum grade
+    Item = 'police_bypass',                     -- nil = the job alone is enough
+    UseItemToUnlock = true,                     -- using the item unlocks the closest vehicle
+    Distance = 3.0,
+}
+```
+
+## Dispatch [#dispatch]
+
+```lua
+Config.Dispatch = {
+    Enabled = true,
+    System = 'ps-dispatch', -- 'ps-dispatch' | 'builtin' | 'custom'
+    Jobs = { 'police', 'sheriff' },
+    Chance = { lockpick = 1.0, hotwire = 0.75, carjack = 1.0 },
+    Blip = { sprite = 229, color = 1, scale = 1.0, time = 60 },
+    Custom = function(data)
+        -- data = { action, vehicle, plate, model, coords }
+    end,
+}
+```
+
+* **ps-dispatch** calls its `VehicleTheft` (lockpick, hotwire) or `CarJacking` alert.
+* **builtin** sends a notification and a flashing blip to on-duty players in `Jobs`.
+* **custom** runs `Custom(data)` on the offender's client, so you can call any dispatch export.
+
+## Carjacking [#carjacking]
+
+```lua
+Config.Carjack = {
+    Enabled = true,
+    Duration = 6000,       -- progress bar (ms)
+    Distance = 12.0,
+    MaxSpeed = 15.0,       -- m/s
+    SuccessChance = 0.85,
+    FailBehavior = 'flee', -- 'flee' or 'fight'
+    Cooldown = 30,         -- seconds per player
+    GiveKeys = true,
+    MeleeAllowed = false,
+}
 ```
 
 ## Locksmith [#locksmith]
 
 ```lua
 Config.Locksmith = {
-    Job = 'locksmith',          -- Job name as defined in your framework
-
-    OBDConnectDuration  = 4000, -- ms the OBD connection animation plays before the minigame
-    KeyCuttingDistance  = 5.0,  -- Radius (metres) to scan for nearby vehicles when using the cutting tool
-
+    Job = 'locksmith',
+    RequireDuty = true,
     Items = {
-        BlankKey       = 'blank_key',   -- Consumed on every successful duplication
-        KeyCuttingTool = 'key_cutter',  -- Required for mechanical key cutting
-        OBD            = 'obd_scanner', -- Required for electric vehicle fob programming
+        OBD            = { item = 'locksmith_tablet', degrade = 0.1 },
+        KeyCuttingTool = { item = 'key_cutting_tool', degrade = 0.1 },
+        BlankKey       = { item = 'blank_key' },
     },
-```
-
-## Offline Store [#offline-store]
-
-The NPC locksmith spawns when the number of on-duty locksmiths is at or below `MininumDuty`.
-
-```lua
+    Interactions = {
+        { coords = vec3(165.660, -1810.262, 29.275), type = 'KeyCutting' },
+    },
+    Blips = {
+        { coords = vec3(167.32, -1803.38, 29.32), label = 'Locksmith', sprite = 811, color = 5, scale = 1.0 },
+    },
     OfflineStore = {
-        Enabled     = true,
-        MininumDuty = 0,        -- NPC spawns when active locksmith count <= this value
-
-        Prices = {
-            Mechanical = 500,   -- Price for a standard mechanical key
-            Wireless   = 1000,  -- Price for a wireless key fob (electric vehicles)
-        },
-
+        Enabled = true,
+        MininumDuty = 0, -- NPC store opens when on-duty locksmiths <= this
+        Prices = { Mechanical = 1000, Wireless = 5000 },
         Locations = {
             {
-                model    = 's_m_y_autoshop_02',             -- Ped model
-                coords   = vector4(0.0, 0.0, 0.0, 0.0),    -- x, y, z, heading
-                scenario = 'WORLD_HUMAN_CLIPBOARD',         -- Idle scenario (optional)
-                -- anim = { dict = '...', name = '...', flag = 1 } -- Or use an anim instead
+                coords = vec4(165.55, -1808.37, 28.32, 320.84),
+                anim = { dict = 'anim@amb@nightclub@lazlow@ig1_vip@', name = 'clubvip_base_laz', flag = 1 },
+                model = `s_m_y_xmech_01`,
             },
         },
     },
-```
-
-## Blips [#blips]
-
-```lua
-    Blips = {
-        {
-            label  = 'Locksmith',
-            sprite = 446,
-            scale  = 0.8,
-            color  = 0,
-            coords = vector3(0.0, 0.0, 0.0),
-        },
-    },
-```
-
-## Interactions [#interactions]
-
-Interaction zones are where the key cutting bench is located. Locksmiths can use these to
-open the duplication menu from their inventory keys.
-
-```lua
-    Interactions = {
-        {
-            coords = vector3(0.0, 0.0, 0.0),
-        },
-    },
 }
-```
-
-## Hotwire [#hotwire]
-
-```lua
-Config.Hotwire = {
-    Enabled    = true,
-    Key        = 'H',           -- Default keybind
-    AlarmChance = 0.3,          -- 0.0–1.0 chance of triggering the vehicle alarm on attempt
-    Item       = 'hotwire_kit', -- Required item to attempt hotwire (set to nil to disable)
-}
-```
-
-## Lockpick [#lockpick]
-
-```lua
-Config.Lockpick = {
-    AlarmChance = 0.2,
-}
-
-Config.AdvancedLockpick = {
-    AlarmChance = 0.05,
-}
-```
-
-## Keyless System [#keyless-system]
-
-Electric vehicles are detected automatically on game build 3258+. For older builds, you can
-define models manually.
-
-```lua
-Config.KeylessSystem = {
-    Models = {
-        `volta`,
-        `imorgon`,
-        `cyclone`,
-        -- add model hashes here
-    },
-}
-```
-
-<Callout type="info">
-  On game build 3258 and above, `GetIsVehicleElectric` is used natively and the `Models`
-  list is ignored.
-</Callout>
-
-## Job Keys [#job-keys]
-
-```lua
-Config.JobKeys = true   -- Allow job-restricted key access (e.g. police vehicles)
 ```
 
 
@@ -1422,195 +1525,45 @@ Config.JobKeys = true   -- Allow job-restricted key access (e.g. police vehicles
 
 
 
+
+
 ## Server [#server]
 
-### `GiveKeys` [#givekeys]
-
-Give a player a key item for a vehicle.
+`target` can be a plate, network ID or entity.
 
 ```lua
-exports.filo_vehiclekeys:GiveKeys(source --[[number]], vehicle --[[entity]])
+exports.filo_vehiclekeys:GiveKeys(source, target, forceGive, invalidateOldKey)
+exports.filo_vehiclekeys:RemoveKeys(source, target)
+exports.filo_vehiclekeys:GiveJobKeys(plate, job)
+exports.filo_vehiclekeys:RemoveJobKeys(plate, job)
+exports.filo_vehiclekeys:SetKeysInIgnition(plate, keysInIgnition, canRemove)
+exports.filo_vehiclekeys:SetLockState(vehicle, locked) -- boolean, or 2 = locked / 1 = unlocked
+exports.filo_vehiclekeys:HasVehicleAccess(source, vehicle) -- keys, job keys or police bypass
 ```
-
-***
-
-### `GiveKeysByPlate` [#givekeysbyplate]
-
-Give a player a key item by plate string directly.
-
-```lua
-exports.filo_vehiclekeys:GiveKeysByPlate(source --[[number]], plate --[[string]])
-```
-
-***
-
-### `RemoveKeys` [#removekeys]
-
-Remove a player's key item for a vehicle.
-
-```lua
-exports.filo_vehiclekeys:RemoveKeys(source --[[number]], vehicle --[[entity]])
-```
-
-***
-
-### `RemoveKeysByPlate` [#removekeysbyplate]
-
-```lua
-exports.filo_vehiclekeys:RemoveKeysByPlate(source --[[number]], plate --[[string]])
-```
-
-***
-
-### `GiveJobKeys` [#givejobkeys]
-
-Grant job-restricted access to a vehicle. Does not give a physical key item — access is
-checked at runtime against the player's current job.
-
-```lua
-exports.filo_vehiclekeys:GiveJobKeys(plate --[[string]], job --[[string]])
-```
-
-***
-
-### `RemoveJobKeys` [#removejobkeys]
-
-```lua
-exports.filo_vehiclekeys:RemoveJobKeys(plate --[[string]], job --[[string]])
-```
-
-***
-
-### `SetKeysInIgnition` [#setkeysinignition]
-
-Set whether keys are currently in the ignition for a vehicle. Used to grant temporary
-access without giving a permanent key item.
-
-```lua
-exports.filo_vehiclekeys:SetKeysInIgnition(
-    plate         --[[string]],
-    keysInIgnition --[[boolean]],
-    canRemove     --[[boolean]]  -- whether the player can physically remove the keys
-)
-```
-
-***
-
-### `IsKeysInIgnition` [#iskeysinignition]
-
-Check whether keys are currently in the ignition for a vehicle.
-
-```lua
-local keysInIgnition = exports.filo_vehiclekeys:IsKeysInIgnition(entity --[[entity|netId]])
-```
-
-***
-
-### `SetLockState` [#setlockstate]
-
-Directly set the lock state of a vehicle by net ID.
-
-```lua
-exports.filo_vehiclekeys:SetLockState(netId --[[number]], state --[[boolean]])
-```
-
-***
 
 ## Client [#client]
 
-### `GiveKeys` [#givekeys-1]
-
-Give the local player a key for a vehicle entity.
-
 ```lua
-exports.filo_vehiclekeys:GiveKeys(vehicle --[[entity]])
-exports.filo_vehiclekeys:GiveKeysByPlate(plate --[[string]])
+exports.filo_vehiclekeys:GiveKeys(vehicle, invalidateOldKey)
+exports.filo_vehiclekeys:GiveKeysByPlate(plate, invalidateOldKey)
+exports.filo_vehiclekeys:RemoveKeys(vehicle)
+exports.filo_vehiclekeys:RemoveKeysByPlate(plate)
+
+exports.filo_vehiclekeys:HasKeys(vehicle)
+exports.filo_vehiclekeys:HasKeysByPlate(plate)
+exports.filo_vehiclekeys:HasJobKeys(vehicle)
+exports.filo_vehiclekeys:HasJobKeysByPlate(plate)
+exports.filo_vehiclekeys:HasVehicleAccess(vehicle) -- keys, job keys or police bypass
+exports.filo_vehiclekeys:HasPoliceBypass()
+
+exports.filo_vehiclekeys:GiveJobKeys(vehicle, job)
+exports.filo_vehiclekeys:RemoveJobKeys(vehicle, job)
+exports.filo_vehiclekeys:SetKeysInIgnition(plate, keysInIgnition, canRemove)
 ```
 
-***
-
-### `RemoveKeys` [#removekeys-1]
-
-Remove the local player's key for a vehicle.
-
-```lua
-exports.filo_vehiclekeys:RemoveKeys(vehicle --[[entity]])
-exports.filo_vehiclekeys:RemoveKeysByPlate(plate --[[string]])
-```
-
-***
-
-### `HasKeys` [#haskeys]
-
-Returns the key item if the local player has a valid key for the vehicle, or `false`.
-
-```lua
-local key = exports.filo_vehiclekeys:HasKeys(vehicle --[[entity]])
-local key = exports.filo_vehiclekeys:HasKeysByPlate(plate --[[string]])
-```
-
-***
-
-### `HasJobKeys` [#hasjobkeys]
-
-Returns `true` if the local player's current job grants access to the vehicle.
-
-```lua
-local hasAccess = exports.filo_vehiclekeys:HasJobKeys(vehicle --[[entity]])
-local hasAccess = exports.filo_vehiclekeys:HasJobKeysByPlate(plate --[[string]])
-```
-
-***
-
-### `GiveJobKeys` [#givejobkeys-1]
-
-```lua
-exports.filo_vehiclekeys:GiveJobKeys(vehicle --[[entity]], job --[[string]])
-exports.filo_vehiclekeys:GiveJobKeysByPlate(plate --[[string]], job --[[string]])
-```
-
-***
-
-### `RemoveJobKeys` [#removejobkeys-1]
-
-```lua
-exports.filo_vehiclekeys:RemoveJobKeys(vehicle --[[entity]], job --[[string]])
-exports.filo_vehiclekeys:RemoveJobKeysByPlate(plate --[[string]], job --[[string]])
-```
-
-***
-
-### `SetKeysInIgnition` [#setkeysinignition-1]
-
-```lua
-exports.filo_vehiclekeys:SetKeysInIgnition(
-    plate          --[[string]],
-    keysInIgnition --[[boolean]],
-    canRemove      --[[boolean]]
-)
-```
-
-***
-
-### `IsKeysInIgnition` [#iskeysinignition-1]
-
-Check whether keys are currently in the ignition for a vehicle.
-
-```lua
-local keysInIgnition = exports.filo_vehiclekeys:IsKeysInIgnition(entity --[[entity|netId]])
-```
-
-Shorthand helpers:
-
-```lua
--- Insert keys into ignition (canRemove = false)
-exports.filo_vehiclekeys:GiveTempKeys(vehicle --[[entity]])
-exports.filo_vehiclekeys:GiveTempKeysByPlate(plate --[[string]])
-
--- Remove temp keys
-exports.filo_vehiclekeys:RemoveTempKeys(vehicle --[[entity]])
-exports.filo_vehiclekeys:RemoveTempKeysByPlate(plate --[[string]])
-```
+<Callout type="info">
+  `StartEngineWithoutKeys` is also exported for tr\_core's key bridge. You don't need to call it yourself.
+</Callout>
 
 
 # Flows (/docs/paid_resources/filo_vehiclekeys/flows)
@@ -1619,166 +1572,69 @@ exports.filo_vehiclekeys:RemoveTempKeysByPlate(plate --[[string]])
 
 
 
-## Mechanical Key Cutting [#mechanical-key-cutting]
+## Lockpicking & Hotwiring [#lockpicking--hotwiring]
 
-Used for non-electric vehicles. Can be triggered in two ways.
+Every attempt resolves to a difficulty tier (`easy` / `medium` / `hard` / `expert`) from
+`ModelDifficulty`, then `VehicleClassDifficulty`, then `DefaultDifficulty`.
 
-### From the Key Cutting Station [#from-the-key-cutting-station]
+* **Lockpick:** use `lockpick` or `advanced_lockpick` near a locked vehicle. Pass the minigame, then the server rolls the tier's chance. Tools lose durability and may trigger the alarm.
+* **Hotwire:** press `H` in a vehicle you have no key for, with `Config.Hotwire.HotwireItem`. A progress bar runs for the tier's time, then the minigame at the tier's level, then the server rolls the chance.
+* **Search:** press `Y` in a parked vehicle to search for its key (`Config.KeySearching`).
 
-Target zone or textui interaction at configured `Interactions` coordinates.
-Opens a menu listing all vehicle keys currently in the locksmith's inventory.
-
-**Requirements:**
-
-* Locksmith job, on duty
-* At least one `vehiclekey` item in inventory
-* `BlankKey` item in inventory
-
-<Steps>
-  <Step>
-    Approach the key cutting bench and interact with it.
-  </Step>
-
-  <Step>
-    Select a key from your inventory to duplicate.
-  </Step>
-
-  <Step>
-    Choose whether to invalidate the owner's existing key.
-  </Step>
-
-  <Step>
-    Complete the minigame and progress bar.
-  </Step>
-
-  <Step>
-    A duplicate key is added to your inventory. The blank key is consumed.
-  </Step>
-</Steps>
-
-### From the Key Cutting Tool Item [#from-the-key-cutting-tool-item]
-
-Using the `KeyCuttingTool` item opens a combined menu of:
-
-* Keys in the locksmith's inventory (non-keyless only)
-* Any non-electric vehicles within `KeyCuttingDistance` metres
-
-This allows duplication without needing the owner's physical key, as long as their vehicle
-is present.
-
-**Requirements:**
-
-* Locksmith job, on duty
-* `BlankKey` and `KeyCuttingTool` in inventory
+Models in `Config.Blacklist.Models` can't be lockpicked, hotwired or carjacked (per action).
 
 <Callout type="info">
-  If a vehicle is both in the locksmith's inventory and physically nearby, it only appears
-  once in the menu — sourced from the inventory entry.
+  With `Config.Minigames = 'tr_minigames'`, tr\_minigames handles these flows. See
+  [Compatibility](/docs/filo_vehiclekeys/compatibility#tr_minigames).
 </Callout>
 
-***
+## Carjacking [#carjacking]
 
-## OBD Key Fob Programming [#obd-key-fob-programming]
+Aim a gun at an NPC driver within `Distance` of a car slower than `MaxSpeed`. The driver brakes and
+a progress bar starts; it cancels if you stop aiming or move away.
 
-Used exclusively for electric vehicles. Triggered by using the `OBD` scanner item.
+* **Success:** the driver gets out and runs, the car unlocks, you get its key and police are alerted.
+* **Failure:** the driver drives off or fights back (`FailBehavior`).
 
-The locksmith connects the scanner under the dash, reads the vehicle's key programming, and
-writes it to a blank key fob.
+The aim check only runs while a weapon is drawn. Each player has a `Cooldown` between attempts.
 
-**Requirements:**
+## Police [#police]
 
-* Locksmith job, on duty
-* Seated in the **driver's seat** of an electric vehicle
-* `BlankKey` and `OBD` scanner in inventory
+Jobs in `Config.PoliceBypass.Jobs` (at the minimum grade, on duty, and carrying `police_bypass` if
+set) can lock, unlock, insert the ignition and start the engine on any vehicle. With
+`UseItemToUnlock`, using the item unlocks the closest vehicle. Carjacking a blacklisted vehicle
+with the bypass is allowed and sends no dispatch.
 
-<Steps>
-  <Step>
-    Enter and sit in the driver's seat of an electric vehicle.
-  </Step>
+Successful lockpicks, hotwires and carjacks send a dispatch alert based on `Config.Dispatch.Chance`.
 
-  <Step>
-    Use the OBD scanner item from your inventory.
-  </Step>
+## Locksmith [#locksmith]
 
-  <Step>
-    Confirm the programming prompt and choose whether to invalidate the existing fob.
-  </Step>
+* **Key cutting:** at a key cutting station or with the `key_cutting_tool`. Copies a key from the locksmith's inventory or a nearby vehicle. Uses a `blank_key`.
+* **OBD programming:** for keyless vehicles. The locksmith sits in the driver's seat and uses the `locksmith_tablet`.
+* **Invalidate old keys:** optional when making a key. Generates a new key ID so every old copy stops working.
+* **NPC store:** when `OfflineStore.MininumDuty` or fewer locksmiths are on duty, players can buy spare keys for vehicles they own. Prices are enforced on the server.
+* **Ignition repair:** use `electrical_tools` in a hotwired vehicle to clear the hotwire. Only needed when `Config.Hotwire.SaveHotwireState` is on.
 
-  <Step>
-    A timed animation plays for `OBDConnectDuration` milliseconds while the scanner reads
-    the key data.
+## Admin Panel [#admin-panel]
 
-    <Callout type="warn">
-      Leaving the driver's seat during this window cancels the process immediately.
-    </Callout>
-  </Step>
+`/keyadmin` lists stored and spawned vehicles (spawned ones have a green dot). For each vehicle you can:
 
-  <Step>
-    Complete the minigame.
-  </Step>
+* toggle keyless, keys-in-ignition, engine-on and hotwired
+* add or remove jobs with access
+* regenerate the key ID, making every existing key useless
+* give a key to an online player
+* delete the stored record
 
-  <Step>
-    A programmed key fob is added to your inventory. The blank key and OBD scanner are consumed.
-  </Step>
-</Steps>
+Every action is checked on the server against the `command.keyadmin` permission.
 
-***
+## Key Validation [#key-validation]
 
-## NPC Locksmith [#npc-locksmith]
+A key item is valid when its plate and key ID match the vehicle's current key ID. The server keeps
+that ID on the spawned vehicle, or in the `filo_vehiclekeys` table for owned vehicles that aren't
+spawned. Checks never trust client data.
 
-When the number of on-duty locksmiths is at or below `Config.Locksmith.OfflineStore.MininumDuty`,
-NPC peds spawn at each configured location in `OfflineStore.Locations`.
-
-Players can purchase spare keys directly from the NPC without a locksmith player present.
-
-**Pricing:**
-
-* Standard mechanical key — `OfflineStore.Prices.Mechanical`
-* Wireless key fob (electric vehicles) — `OfflineStore.Prices.Wireless`
-
-The NPC menu lists all vehicles owned by the interacting player. The player can choose
-whether to invalidate their existing key when purchasing a spare.
-
-<Callout type="info">
-  NPC peds are automatically removed when a locksmith comes on duty, and re-spawned when
-  the last locksmith goes off duty or disconnects. This is handled in real time via a
-  GlobalState handler — no restart required.
-</Callout>
-
-***
-
-## Key Invalidation [#key-invalidation]
-
-Every duplication flow asks whether to invalidate the existing key. This is relevant when:
-
-* A vehicle was stolen and the owner wants their key to stop working
-* A locksmith is cutting a key for a customer who lost theirs
-
-When invalidated:
-
-* A new `keyId` is generated and written to the vehicle data
-* If the vehicle is currently spawned, statebags are updated immediately so the old key
-  stops working in the active session
-* The owner's existing `vehiclekey` item becomes invalid as its stored `id` no longer
-  matches the vehicle's current `keyId`
-
-When not invalidated:
-
-* The duplicate is cut with the same `keyId` as the existing key
-* Both keys work simultaneously
-
-***
-
-## Minigame [#minigame]
-
-All duplication flows use the same minigame sequence:
-
-1. `exports.minigames:Play('locksmith', { difficulty = 3 })` — the skill check
-2. `lib.progressBar` — a timed progress bar (5–10 seconds, randomly) representing the
-   physical cutting or programming work
-
-Cancelling the progress bar or failing the minigame aborts the flow with no item consumption
-— except for the OBD flow, where the animation has already played.
+Keys for unowned vehicles (NPC, stolen or job cars) are removed when the vehicle is deleted and
+after a server restart (`Config.KeyCleanup`). Player-owned vehicles always keep their keys.
 
 
 # 🔑 filo_vehiclekeys (/docs/paid_resources/filo_vehiclekeys)
@@ -1789,41 +1645,58 @@ Cancelling the progress bar or failing the minigame aborts the flow with no item
 
 [![Buy on Tebex](https://img.shields.io/badge/Tebex-blue?style=for-the-badge\&logo=tebex)](https://filo.tebex.io/package/filo-vehiclekeys)
 
-Duplicate keys, program key fobs, and manage locksmith interactions for FiveM servers.
-Supports both mechanical key cutting and OBD-based fob programming for electric vehicles,
-with an NPC fallback store when no locksmiths are on duty.
+Item-based vehicle keys for FiveM: physical keys and key fobs, ignition handling, lockpicking,
+hotwiring, NPC carjacking, a locksmith job, police dispatch and an admin panel. All outcomes are
+decided on the server and everything is tuned from `shared/sh-config.lua`.
 
 <Callout type="info">
-  This is a full rewrite of the original `filo_vehiclekeys` release. The codebase has been
-  refactored from the ground up — MySQL-backed storage, cleaner architecture, and properly
-  separated client and server logic.
+  Current version: **2.0.0**. Framework, inventory, minigame, dispatch and target code lives in the
+  open `bridge/` folder, so you can adapt it to your server.
 </Callout>
 
 ## Features [#features]
 
-* Mechanical key cutting from inventory keys or nearby vehicles
-* OBD-based key fob programming for electric vehicles
-* Locksmith job integration with on-duty checks
-* NPC locksmith fallback when no players are on duty
-* Configurable offline store with separate pricing for mechanical and wireless keys
-* Optional key invalidation when duplicating
-* ox\_target and textui interaction support
-* filo\_blips integration with native blip fallback
-* MySQL-backed vehicle data storage with automatic table creation
-* Drop-in compatibility with qb-vehiclekeys, qbx\_vehiclekeys, and previous version of filo\_vehiclekey.
+**Keys**
+
+* Keys are `vehiclekey` items tied to a plate and a key ID; a new key ID instantly invalidates every old copy
+* Mechanical keys and keyless fobs (auto-detected for electric models, or per model)
+* Key fob UI: lock, unlock, trunk, panic, remote engine, convertible roof, summon, auto-lock and auto-start
+* Insert/remove keys from the ignition, hold to start the engine
+* Job keys: give a whole job access to a vehicle without an item
+* Keys for unowned vehicles are removed on despawn and after a restart
+
+**Theft**
+
+* Lockpick and advanced lockpick with per-tier success chances, durability and alarm chance
+* Hotwiring with per-tier times and minigame difficulty
+* Difficulty tiers mapped by GTA vehicle class, with per-model overrides
+* Searching parked vehicles for keys
+* NPC carjacking: aim at a driver, hold them up, take the car and its key
+* Model blacklist per action
+
+**Police**
+
+* Bypass for configured jobs (grade, duty, optional `police_bypass` item)
+* Dispatch alerts via ps-dispatch, a built-in notify + blip, or your own function
+
+**Locksmith & Admin**
+
+* Key cutting, OBD fob programming and ignition repair
+* NPC store for spare keys when not enough locksmiths are on duty
+* `/keyadmin` panel to manage vehicles, key IDs, job access and keys
 
 ## Pages [#pages]
 
 <Cards>
-  <Card title="Installation" href="/docs/filo_vehiclekeys/installation" description="Dependencies, setup steps, and migration from the legacy BIN format." />
+  <Card title="Installation" href="/docs/filo_vehiclekeys/installation" description="Dependencies, items, controls and commands." />
 
-  <Card title="Configuration" href="/docs/filo_vehiclekeys/configuration" description="Full breakdown of every config option available." />
+  <Card title="Configuration" href="/docs/filo_vehiclekeys/configuration" description="Every config section explained." />
 
-  <Card title="Flows" href="/docs/filo_vehiclekeys/flows" description="How mechanical key cutting, OBD programming, and the NPC store work." />
+  <Card title="Flows" href="/docs/filo_vehiclekeys/flows" description="Theft, carjacking, locksmith, admin panel and key validation." />
 
   <Card title="Exports" href="/docs/filo_vehiclekeys/exports" description="Client and server exports for use in other resources." />
 
-  <Card title="Compatibility" href="/docs/filo_vehiclekeys/compatibility" description="Drop-in support for qb-vehiclekeys, qbx_vehiclekeys, and previous version of filo_vehiclekey." />
+  <Card title="Compatibility" href="/docs/filo_vehiclekeys/compatibility" description="qb-vehiclekeys, qbx_vehiclekeys, tr_minigames and the bridge." />
 </Cards>
 
 
@@ -1835,51 +1708,158 @@ with an NPC fallback store when no locksmiths are on duty.
 
 ## Dependencies [#dependencies]
 
-| Resource                                                           | Required | Notes                               |
-| ------------------------------------------------------------------ | -------- | ----------------------------------- |
-| [oxmysql](https://github.com/overextended/oxmysql)                 | Yes      |                                     |
-| [ox\_lib](https://github.com/overextended/ox_lib)                  | Yes      |                                     |
-| [filo\_textui](https://filo.tebex.io/package/filo-textui)          | Yes      |                                     |
-| [eye\_minigames](https://github.com/invalid0190/eye_minigames)     | Yes      |                                     |
-| [community\_bridge](https://github.com/blamefilo/community_bridge) | Yes      | Framework abstraction layer         |
-| [filo\_blips](https://github.com/blamefilo/filo_blips)             | No       | Falls back to native FiveM blips    |
-| ox\_target / qb-target                                             | No       | Falls back to textui if not present |
-| [xsound](https://github.com/Xogy/xsound)                           | No       | Ignition and hotwire sound effects  |
+| Resource                                                                         | Required    | Used for                                                                                          |
+| -------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------- |
+| [ox\_lib](https://github.com/overextended/ox_lib)                                | Yes         | Callbacks, keybinds, progress bars, notifications                                                 |
+| [oxmysql](https://github.com/overextended/oxmysql)                               | Yes         | Key data storage                                                                                  |
+| [community\_bridge](https://github.com/blamefilo/community_bridge)               | Yes         | Framework, inventory and notification bridge                                                      |
+| [sleepless\_prompts](https://github.com/Sleepless-Development/sleepless_prompts) | Yes         | In-vehicle and locksmith prompts (included in the download)                                       |
+| [eye\_minigames](https://github.com/invalid0190/eye_minigames)                   | Default     | Minigames when `Config.Minigames = 'builtin'`                                                     |
+| tr\_minigames + tr\_core                                                         | Optional    | Physical lockpick and hotwire when `Config.Minigames = 'tr_minigames'` (included, pre-configured) |
+| ox\_target                                                                       | Optional    | Locksmith interactions when `Config.InteractionType = 'target'`                                   |
+| ps-dispatch                                                                      | Optional    | Dispatch when `Config.Dispatch.System = 'ps-dispatch'`                                            |
+| [xsound](https://github.com/Xogy/xsound)                                         | Optional    | Ignition sounds                                                                                   |
+| filo\_blips                                                                      | Optional    | Locksmith blips (falls back to native blips)                                                      |
+| baseevents                                                                       | Recommended | Lock state and NPC vehicle locking on entry                                                       |
+
+Supported frameworks (through community\_bridge): Qbox, QBCore and ESX.
+
+<Callout type="warn">
+  `filo_textui` is no longer used. v2.0.0 uses `sleepless_prompts` for all prompts.
+</Callout>
 
 ## Setup [#setup]
 
 <Steps>
   <Step>
-    Download and extract `filo_vehiclekeys` into your resources folder.
+    Put 
+
+    `filo_vehiclekeys`
+
+     (and 
+
+    `sleepless_prompts`
+
+    , 
+
+    `tr_core`
+
+    , 
+
+    `tr_minigames`
+
+     from the download) in your resources folder.
   </Step>
 
   <Step>
-    Add the following to your `server.cfg`:
+    Add the items from 
+
+    `INSTALL/ox_inventory.txt`
+
+     to your inventory and copy the images from 
+
+    `INSTALL/item images`
+
+    . If you use tr_minigames, also add 
+
+    `wire_strippers`
+
+     from 
+
+    `tr_minigames/install/ox_inventory/items.lua`
+
+    .
+  </Step>
+
+  <Step>
+    Ensure the resources after their dependencies:
 
     ```
     ensure ox_lib
-    ensure qbx_core # or the framework you are using
-    ensure ox_target
-    ensure ox_inventory
+    ensure oxmysql
     ensure community_bridge
-    ensure eye_minigames
-    ensure filo_textui
+    ensure sleepless_prompts
     ensure filo_vehiclekeys
+    ensure tr_core      # only with Config.Minigames = 'tr_minigames'
+    ensure tr_minigames
     ```
   </Step>
 
   <Step>
-    Start your server. The SQL table is created automatically on first boot — no manual database imports required.
+    Start the server. The 
+
+    `filo_vehiclekeys`
+
+     table is created automatically.
   </Step>
 
   <Step>
-    Configure the resource to match your server setup. See the [Configuration](/docs/filo_vehiclekeys/configuration) page.
+    Remove any other vehicle key resource. This one provides 
+
+    `qb-vehiclekeys`
+
+    , 
+
+    `qbx_vehiclekeys`
+
+     and 
+
+    `filo_vehiclekey`
+
+    .
   </Step>
 </Steps>
 
+## Items [#items]
+
+| Item                             | Purpose                                                       |
+| -------------------------------- | ------------------------------------------------------------- |
+| `vehiclekey`                     | The key or fob itself (metadata holds plate and key ID)       |
+| `lockpick` / `advanced_lockpick` | Lockpicking                                                   |
+| `electrical_tools`               | Hotwiring and repairing hotwired ignitions                    |
+| `blank_key`                      | Consumed when a locksmith makes a key                         |
+| `key_cutting_tool`               | Cutting mechanical keys                                       |
+| `locksmith_tablet`               | Programming fobs over OBD                                     |
+| `police_bypass`                  | Police master key (only if `Config.PoliceBypass.Item` is set) |
+
+```lua
+["police_bypass"] = {
+    label = "Police Master Key",
+    weight = 50,
+    stack = false,
+    close = true,
+    description = "Unlocks and starts any vehicle (police only).",
+},
+```
+
+<Callout type="info">
+  `vehiclekey` must have `stack = false`: each key is a unique item with its own metadata.
+</Callout>
+
+## Controls [#controls]
+
+| Default key | Action                                             |
+| ----------- | -------------------------------------------------- |
+| `L`         | Lock / unlock the closest vehicle                  |
+| `G`         | Insert / remove the key (hold to start the engine) |
+| `M`         | Engine on / off                                    |
+| `H`         | Hotwire                                            |
+| `Y`         | Search the vehicle for keys                        |
+
+Players can rebind these in the FiveM key bindings menu. Defaults are in `Config.DefaultKeybinds`.
+
+## Commands [#commands]
+
+| Command                                     | Permission    | Description                                                                                                      |
+| ------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `/givekey [id] [plate]` (alias `/givekeys`) | `group.admin` | Give a key. Defaults to yourself and your current vehicle. Plates may contain spaces. Works for stored vehicles. |
+| `/givejobkey <job> [plate]`                 | `group.admin` | Give a job access to a spawned vehicle                                                                           |
+| `/keyadmin`                                 | `group.admin` | Open the admin panel                                                                                             |
+
 ## SQL Table [#sql-table]
 
-The following table is created automatically. You do not need to run this manually.
+Created automatically on first boot. Only player-owned vehicles are written, and records
+inactive for `Config.VehicleDataRetentionMonths` are pruned.
 
 ```sql
 CREATE TABLE IF NOT EXISTS `filo_vehiclekeys` (
@@ -1890,65 +1870,3 @@ CREATE TABLE IF NOT EXISTS `filo_vehiclekeys` (
     PRIMARY KEY (`plate`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
-
-Inactive vehicle records are pruned automatically based on the `VehicleDataRetentionMonths`
-config value. Only vehicles owned by a player are ever written to the table.
-
-## Items [#items]
-
-If you are using `ox_inventory`, add the following to your `items.lua`:
-
-```lua
-["vehiclekey"] = {
-    label = "Vehicle Key",
-    weight = 10,
-    width = 1,
-    height = 1,
-    stack = false,
-    close = true,
-},
-["locksmith_tablet"] = {
-    label = "Locksmith Tablet",
-    weight = 150,
-    width = 1,
-    height = 1,
-    close = true,
-},
-["key_cutting_tool"] = {
-    label = "Key Cutting Tool",
-    weight = 100,
-    width = 1,
-    height = 1,
-    close = true,
-},
-["blank_key"] = {
-    label = "Blank Key",
-    weight = 50,
-    width = 1,
-    height = 1,
-    close = true,
-},
-["electrical_tools"] = {
-    label = "Electrical Tools",
-    weight = 10,
-    width = 1,
-    height = 1,
-    stack = false,
-    close = true,
-},
-```
-
-Then update your `Config.Locksmith.Items` to match the item names you defined:
-
-```lua
-Config.Locksmith.Items = {
-    BlankKey       = 'blank_key',
-    KeyCuttingTool = 'key_cutting_tool',
-    OBD            = 'locksmith_tablet',
-}
-```
-
-<Callout type="info">
-  `vehiclekey` and `electrical_tools` have `stack = false` — each key is a unique item
-  with its own metadata (plate, key ID, model info) so stacking must be disabled.
-</Callout>
