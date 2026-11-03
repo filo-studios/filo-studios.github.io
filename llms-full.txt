@@ -387,6 +387,194 @@ Before installing, make sure the following resource is running on your server:
 </Callout>
 
 
+# Configuration (/docs/free_resources/filo_jack/configuration)
+
+
+
+Open:
+
+```
+shared/sh-config.lua
+```
+
+## Debug [#debug]
+
+```lua
+Config.Debug = false
+```
+
+Enable console debugging.
+
+***
+
+## Allowed Jobs [#allowed-jobs]
+
+```lua
+Config.JobsAllowed = {
+    "mechanic",
+}
+```
+
+Set to `nil` to allow everyone.
+
+Example:
+
+```lua
+Config.JobsAllowed = nil
+```
+
+***
+
+## Required Item [#required-item]
+
+```lua
+Config.RequiredItem = "vehicle_jack"
+```
+
+Set to `nil` to disable the inventory requirement.
+
+```lua
+Config.RequiredItem = nil
+```
+
+
+# Exports (/docs/free_resources/filo_jack/exports)
+
+
+
+## IsLifted [#islifted]
+
+Checks whether a vehicle has been fully lifted.
+
+### Client [#client]
+
+```lua
+local lifted = exports.filo_jack:IsLifted(vehicle)
+```
+
+Specify a side.
+
+```lua
+local lifted = exports.filo_jack:IsLifted(vehicle, "left")
+```
+
+### Parameters [#parameters]
+
+| Name   | Type   | Description                      |
+| ------ | ------ | -------------------------------- |
+| entity | number | Vehicle entity                   |
+| side   | string | `"left"` or `"right"` (optional) |
+
+### Returns [#returns]
+
+```lua
+boolean
+```
+
+
+# filo_jack (/docs/free_resources/filo_jack)
+
+
+
+A realistic **FiveM vehicle jack** that allows players to physically lift either side of a vehicle using floor jacks.
+
+## Features [#features]
+
+* Lift either the left or right side independently
+* Realistic pump-by-pump animation
+* Accurate vehicle roll geometry
+* Automatic height compensation
+* Support for jacking both sides simultaneously
+* Export available for detecting lifted vehicles
+
+## Requirements [#requirements]
+
+* [ox\_lib](https://github.com/overextended/ox_lib)
+* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
+
+Continue with the installation guide to get started.
+
+
+# Installation (/docs/free_resources/filo_jack/installation)
+
+
+
+## 1. Install the resource [#1-install-the-resource]
+
+Place the resource inside your server's resources folder.
+
+```
+resources/
+    filo_jack/
+```
+
+## 2. Ensure the resource [#2-ensure-the-resource]
+
+Add the following to your `server.cfg`.
+
+```
+ensure ox_lib
+
+# ensure frameworkName [qbx_core/qb-core]
+
+ensure community_bridge
+ensure filo_jack
+```
+
+## 3. Install dependencies [#3-install-dependencies]
+
+Required:
+
+* [ox\_lib](https://github.com/overextended/ox_lib)
+* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
+
+## 4. Inventory Item [#4-inventory-item]
+
+Create the following inventory item.
+
+```
+['vehicle_jack'] = {
+    label = 'Vehicle Jack',
+    weight = 500,
+},
+```
+
+An item image is included inside:
+
+```
+INSTALL/item images/
+```
+
+## 5. Restart the server [#5-restart-the-server]
+
+Once installed, restart your server.
+
+
+# Usage (/docs/free_resources/filo_jack/usage)
+
+
+
+Approach either side of a vehicle.
+
+Available interactions include:
+
+| Action              | Description                    |
+| ------------------- | ------------------------------ |
+| Attach Jack (Left)  | Place a jack on the left side  |
+| Attach Jack (Right) | Place a jack on the right side |
+| Pump Jack (Left)    | Raise the left side            |
+| Pump Jack (Right)   | Raise the right side           |
+| Detach Jack (Left)  | Remove the left jack           |
+| Detach Jack (Right) | Remove the right jack          |
+
+## Notes [#notes]
+
+* Players must be close to the vehicle.
+* Players must stand on the correct side.
+* Both sides may be lifted independently.
+* Removing one jack correctly preserves the remaining side.
+
+
 # filo_slashtire (/docs/free_resources/filo_slashtire)
 
 
@@ -1038,194 +1226,6 @@ end
 ```
 
 
-# Configuration (/docs/free_resources/filo_jack/configuration)
-
-
-
-Open:
-
-```
-shared/sh-config.lua
-```
-
-## Debug [#debug]
-
-```lua
-Config.Debug = false
-```
-
-Enable console debugging.
-
-***
-
-## Allowed Jobs [#allowed-jobs]
-
-```lua
-Config.JobsAllowed = {
-    "mechanic",
-}
-```
-
-Set to `nil` to allow everyone.
-
-Example:
-
-```lua
-Config.JobsAllowed = nil
-```
-
-***
-
-## Required Item [#required-item]
-
-```lua
-Config.RequiredItem = "vehicle_jack"
-```
-
-Set to `nil` to disable the inventory requirement.
-
-```lua
-Config.RequiredItem = nil
-```
-
-
-# Exports (/docs/free_resources/filo_jack/exports)
-
-
-
-## IsLifted [#islifted]
-
-Checks whether a vehicle has been fully lifted.
-
-### Client [#client]
-
-```lua
-local lifted = exports.filo_jack:IsLifted(vehicle)
-```
-
-Specify a side.
-
-```lua
-local lifted = exports.filo_jack:IsLifted(vehicle, "left")
-```
-
-### Parameters [#parameters]
-
-| Name   | Type   | Description                      |
-| ------ | ------ | -------------------------------- |
-| entity | number | Vehicle entity                   |
-| side   | string | `"left"` or `"right"` (optional) |
-
-### Returns [#returns]
-
-```lua
-boolean
-```
-
-
-# filo_jack (/docs/free_resources/filo_jack)
-
-
-
-A realistic **FiveM vehicle jack** that allows players to physically lift either side of a vehicle using floor jacks.
-
-## Features [#features]
-
-* Lift either the left or right side independently
-* Realistic pump-by-pump animation
-* Accurate vehicle roll geometry
-* Automatic height compensation
-* Support for jacking both sides simultaneously
-* Export available for detecting lifted vehicles
-
-## Requirements [#requirements]
-
-* [ox\_lib](https://github.com/overextended/ox_lib)
-* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
-
-Continue with the installation guide to get started.
-
-
-# Installation (/docs/free_resources/filo_jack/installation)
-
-
-
-## 1. Install the resource [#1-install-the-resource]
-
-Place the resource inside your server's resources folder.
-
-```
-resources/
-    filo_jack/
-```
-
-## 2. Ensure the resource [#2-ensure-the-resource]
-
-Add the following to your `server.cfg`.
-
-```
-ensure ox_lib
-
-# ensure frameworkName [qbx_core/qb-core]
-
-ensure community_bridge
-ensure filo_jack
-```
-
-## 3. Install dependencies [#3-install-dependencies]
-
-Required:
-
-* [ox\_lib](https://github.com/overextended/ox_lib)
-* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
-
-## 4. Inventory Item [#4-inventory-item]
-
-Create the following inventory item.
-
-```
-['vehicle_jack'] = {
-    label = 'Vehicle Jack',
-    weight = 500,
-},
-```
-
-An item image is included inside:
-
-```
-INSTALL/item images/
-```
-
-## 5. Restart the server [#5-restart-the-server]
-
-Once installed, restart your server.
-
-
-# Usage (/docs/free_resources/filo_jack/usage)
-
-
-
-Approach either side of a vehicle.
-
-Available interactions include:
-
-| Action              | Description                    |
-| ------------------- | ------------------------------ |
-| Attach Jack (Left)  | Place a jack on the left side  |
-| Attach Jack (Right) | Place a jack on the right side |
-| Pump Jack (Left)    | Raise the left side            |
-| Pump Jack (Right)   | Raise the right side           |
-| Detach Jack (Left)  | Remove the left jack           |
-| Detach Jack (Right) | Remove the right jack          |
-
-## Notes [#notes]
-
-* Players must be close to the vehicle.
-* Players must stand on the correct side.
-* Both sides may be lifted independently.
-* Removing one jack correctly preserves the remaining side.
-
-
 # Compatibility (/docs/paid_resources/filo_vehiclekeys/compatibility)
 
 
@@ -1585,7 +1585,7 @@ Models in `Config.Blacklist.Models` can't be lockpicked, hotwired or carjacked (
 
 <Callout type="info">
   With `Config.Minigames = 'tr_minigames'`, tr\_minigames handles these flows. See
-  [Compatibility](/docs/filo_vehiclekeys/compatibility#tr_minigames).
+  [Compatibility](/docs/paid_resources/filo_vehiclekeys/compatibility#tr_minigames).
 </Callout>
 
 ## Carjacking [#carjacking]
@@ -1688,15 +1688,15 @@ decided on the server and everything is tuned from `shared/sh-config.lua`.
 ## Pages [#pages]
 
 <Cards>
-  <Card title="Installation" href="/docs/filo_vehiclekeys/installation" description="Dependencies, items, controls and commands." />
+  <Card title="Installation" href="/docs/paid_resources/filo_vehiclekeys/installation" description="Dependencies, items, controls and commands." />
 
-  <Card title="Configuration" href="/docs/filo_vehiclekeys/configuration" description="Every config section explained." />
+  <Card title="Configuration" href="/docs/paid_resources/filo_vehiclekeys/configuration" description="Every config section explained." />
 
-  <Card title="Flows" href="/docs/filo_vehiclekeys/flows" description="Theft, carjacking, locksmith, admin panel and key validation." />
+  <Card title="Flows" href="/docs/paid_resources/filo_vehiclekeys/flows" description="Theft, carjacking, locksmith, admin panel and key validation." />
 
-  <Card title="Exports" href="/docs/filo_vehiclekeys/exports" description="Client and server exports for use in other resources." />
+  <Card title="Exports" href="/docs/paid_resources/filo_vehiclekeys/exports" description="Client and server exports for use in other resources." />
 
-  <Card title="Compatibility" href="/docs/filo_vehiclekeys/compatibility" description="qb-vehiclekeys, qbx_vehiclekeys, tr_minigames and the bridge." />
+  <Card title="Compatibility" href="/docs/paid_resources/filo_vehiclekeys/compatibility" description="qb-vehiclekeys, qbx_vehiclekeys, tr_minigames and the bridge." />
 </Cards>
 
 

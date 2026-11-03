@@ -49,13 +49,13 @@ decided on the server and everything is tuned from `shared/sh-config.lua`.
 ## Pages [#pages]
 
 <Cards>
-  <Card title="Installation" href="/docs/filo_vehiclekeys/installation" description="Dependencies, items, controls and commands." />
+  <Card title="Installation" href="/docs/paid_resources/filo_vehiclekeys/installation" description="Dependencies, items, controls and commands." />
 
-  <Card title="Configuration" href="/docs/filo_vehiclekeys/configuration" description="Every config section explained." />
+  <Card title="Configuration" href="/docs/paid_resources/filo_vehiclekeys/configuration" description="Every config section explained." />
 
-  <Card title="Flows" href="/docs/filo_vehiclekeys/flows" description="Theft, carjacking, locksmith, admin panel and key validation." />
+  <Card title="Flows" href="/docs/paid_resources/filo_vehiclekeys/flows" description="Theft, carjacking, locksmith, admin panel and key validation." />
 
-  <Card title="Exports" href="/docs/filo_vehiclekeys/exports" description="Client and server exports for use in other resources." />
+  <Card title="Exports" href="/docs/paid_resources/filo_vehiclekeys/exports" description="Client and server exports for use in other resources." />
 
-  <Card title="Compatibility" href="/docs/filo_vehiclekeys/compatibility" description="qb-vehiclekeys, qbx_vehiclekeys, tr_minigames and the bridge." />
+  <Card title="Compatibility" href="/docs/paid_resources/filo_vehiclekeys/compatibility" description="qb-vehiclekeys, qbx_vehiclekeys, tr_minigames and the bridge." />
 </Cards>
