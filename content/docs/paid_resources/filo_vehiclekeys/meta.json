@@ -4,6 +4,7 @@
         "compatibility",
         "configuration",
         "exports",
-        "flows"
+        "flows",
+        "changelog"
     ]
 }
