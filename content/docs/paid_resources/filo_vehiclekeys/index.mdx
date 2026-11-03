@@ -1,6 +1,6 @@
 ---
 title: 🔑 filo_vehiclekeys
-description: A fully refactored vehicle key management and locksmith system for FiveM.
+description: Item-based vehicle keys, theft, police and locksmith system for FiveM.
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
@@ -8,35 +8,48 @@ import { Cards, Card } from 'fumadocs-ui/components/card';
 
 [![Buy on Tebex](https://img.shields.io/badge/Tebex-blue?style=for-the-badge&logo=tebex)](https://filo.tebex.io/package/filo-vehiclekeys)
 
-Duplicate keys, program key fobs, and manage locksmith interactions for FiveM servers.
-Supports both mechanical key cutting and OBD-based fob programming for electric vehicles,
-with an NPC fallback store when no locksmiths are on duty.
+Item-based vehicle keys for FiveM: physical keys and key fobs, ignition handling, lockpicking,
+hotwiring, NPC carjacking, a locksmith job, police dispatch and an admin panel. All outcomes are
+decided on the server and everything is tuned from `shared/sh-config.lua`.
 
 <Callout type="info">
-  This is a full rewrite of the original `filo_vehiclekeys` release. The codebase has been
-  refactored from the ground up — MySQL-backed storage, cleaner architecture, and properly
-  separated client and server logic.
+  Current version: **2.0.0**. Framework, inventory, minigame, dispatch and target code lives in the
+  open `bridge/` folder, so you can adapt it to your server.
 </Callout>
 
 ## Features
 
-- Mechanical key cutting from inventory keys or nearby vehicles
-- OBD-based key fob programming for electric vehicles
-- Locksmith job integration with on-duty checks
-- NPC locksmith fallback when no players are on duty
-- Configurable offline store with separate pricing for mechanical and wireless keys
-- Optional key invalidation when duplicating
-- ox_target and textui interaction support
-- filo_blips integration with native blip fallback
-- MySQL-backed vehicle data storage with automatic table creation
-- Drop-in compatibility with qb-vehiclekeys, qbx_vehiclekeys, and previous version of filo_vehiclekey.
+**Keys**
+- Keys are `vehiclekey` items tied to a plate and a key ID; a new key ID instantly invalidates every old copy
+- Mechanical keys and keyless fobs (auto-detected for electric models, or per model)
+- Key fob UI: lock, unlock, trunk, panic, remote engine, convertible roof, summon, auto-lock and auto-start
+- Insert/remove keys from the ignition, hold to start the engine
+- Job keys: give a whole job access to a vehicle without an item
+- Keys for unowned vehicles are removed on despawn and after a restart
+
+**Theft**
+- Lockpick and advanced lockpick with per-tier success chances, durability and alarm chance
+- Hotwiring with per-tier times and minigame difficulty
+- Difficulty tiers mapped by GTA vehicle class, with per-model overrides
+- Searching parked vehicles for keys
+- NPC carjacking: aim at a driver, hold them up, take the car and its key
+- Model blacklist per action
+
+**Police**
+- Bypass for configured jobs (grade, duty, optional `police_bypass` item)
+- Dispatch alerts via ps-dispatch, a built-in notify + blip, or your own function
+
+**Locksmith & Admin**
+- Key cutting, OBD fob programming and ignition repair
+- NPC store for spare keys when not enough locksmiths are on duty
+- `/keyadmin` panel to manage vehicles, key IDs, job access and keys
 
 ## Pages
 
 <Cards>
-  <Card title="Installation" href="/docs/filo_vehiclekeys/installation" description="Dependencies, setup steps, and migration from the legacy BIN format." />
-  <Card title="Configuration" href="/docs/filo_vehiclekeys/configuration" description="Full breakdown of every config option available." />
-  <Card title="Flows" href="/docs/filo_vehiclekeys/flows" description="How mechanical key cutting, OBD programming, and the NPC store work." />
+  <Card title="Installation" href="/docs/filo_vehiclekeys/installation" description="Dependencies, items, controls and commands." />
+  <Card title="Configuration" href="/docs/filo_vehiclekeys/configuration" description="Every config section explained." />
+  <Card title="Flows" href="/docs/filo_vehiclekeys/flows" description="Theft, carjacking, locksmith, admin panel and key validation." />
   <Card title="Exports" href="/docs/filo_vehiclekeys/exports" description="Client and server exports for use in other resources." />
-  <Card title="Compatibility" href="/docs/filo_vehiclekeys/compatibility" description="Drop-in support for qb-vehiclekeys, qbx_vehiclekeys, and previous version of filo_vehiclekey." />
+  <Card title="Compatibility" href="/docs/filo_vehiclekeys/compatibility" description="qb-vehiclekeys, qbx_vehiclekeys, tr_minigames and the bridge." />
 </Cards>
