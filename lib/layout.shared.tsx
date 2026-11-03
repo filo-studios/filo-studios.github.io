@@ -1,13 +1,17 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import { appName, gitConfig } from "./shared";
+import { gitConfig } from "./shared";
 import { StoreIcon, UsersRoundIcon } from "lucide-react";
 
 export function baseOptions(): BaseLayoutProps {
     return {
         nav: {
-            // JSX supported
-            title: appName,
+            title: (
+                <span className="font-mono text-[#6dffb3]">
+                    &gt; filo_studios
+                </span>
+            ),
         },
+        themeSwitch: { enabled: false },
         githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
         links: [
             {

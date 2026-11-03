@@ -2,8 +2,38 @@
 @import "fumadocs-ui/css/vitepress.css";
 @import "fumadocs-ui/css/preset.css";
 
+/* Matches filodev.vercel.app */
+:root,
+.dark {
+    --bg: #030402;
+    --bg-raised: #0a0d09;
+    --fg: #eef2f7;
+    --muted: #8b9bb4;
+    --accent: #6dffb3;
+    --line: #6dffb324;
+    --line-dim: #c9d6e817;
+
+    --color-fd-background: var(--bg);
+    --color-fd-foreground: var(--fg);
+    --color-fd-muted: var(--bg-raised);
+    --color-fd-muted-foreground: var(--muted);
+    --color-fd-popover: var(--bg-raised);
+    --color-fd-popover-foreground: var(--fg);
+    --color-fd-card: var(--bg-raised);
+    --color-fd-card-foreground: var(--fg);
+    --color-fd-border: var(--line-dim);
+    --color-fd-primary: var(--accent);
+    --color-fd-primary-foreground: var(--bg);
+    --color-fd-secondary: var(--bg-raised);
+    --color-fd-secondary-foreground: var(--fg);
+    --color-fd-accent: #6dffb314;
+    --color-fd-accent-foreground: var(--accent);
+    --color-fd-ring: var(--accent);
+}
+
 html {
     scrollbar-gutter: stable;
+    color-scheme: dark;
 }
 
 html > body[data-scroll-locked] {
@@ -11,79 +41,87 @@ html > body[data-scroll-locked] {
     --removed-body-scroll-bar-size: 0px !important;
 }
 
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-    bottom: 0;
-    left: -50%;
-    width: 200%;
-    height: 320px;
-    pointer-events: none;
-    z-index: 0;
-    border-radius: 50% 50% 0 0 / 80px 80px 0 0;
+body {
+    background-color: var(--bg);
+    background-image:
+        linear-gradient(var(--line-dim) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line-dim) 1px, transparent 1px);
+    background-size: 48px 48px;
+    font-family: var(--font-jetbrains), ui-monospace, monospace;
+    font-size: 15px;
 }
 
-body::before {
-    background:
-        radial-gradient(
-            ellipse 60% 100% at 30% 100%,
-            rgba(255, 255, 255, 0.18) 0%,
-            transparent 70%
-        ),
-        radial-gradient(
-            ellipse 80% 100% at 70% 100%,
-            rgba(255, 255, 255, 0.12) 0%,
-            transparent 70%
-        ),
-        radial-gradient(
-            ellipse 40% 60% at 50% 100%,
-            rgba(255, 255, 255, 0.22) 0%,
-            transparent 80%
-        );
-    animation: cloudDrift1 18s ease-in-out infinite alternate;
-    filter: blur(18px);
-    opacity: 0.7;
+::selection {
+    background: var(--accent);
+    color: var(--bg);
 }
 
-body::after {
-    background:
-        radial-gradient(
-            ellipse 70% 80% at 20% 100%,
-            rgba(255, 255, 255, 0.15) 0%,
-            transparent 65%
-        ),
-        radial-gradient(
-            ellipse 50% 90% at 80% 100%,
-            rgba(255, 255, 255, 0.2) 0%,
-            transparent 75%
-        );
-    animation: cloudDrift2 24s ease-in-out infinite alternate;
-    filter: blur(28px);
-    opacity: 0.5;
+/* Square corners everywhere, like the portfolio */
+*,
+*::before,
+*::after {
+    border-radius: 0 !important;
 }
 
-@media (prefers-color-scheme: light) {
-    body::before,
-    body::after {
-        opacity: 0.4;
-    }
+/* Headings */
+h1,
+h2,
+.prose h1,
+.prose h2 {
+    font-family: var(--font-space-grotesk), sans-serif;
+    letter-spacing: -0.025em;
 }
 
-@keyframes cloudDrift1 {
-    from {
-        transform: translateX(0px) scaleY(1);
-    }
-    to {
-        transform: translateX(40px) scaleY(1.05);
-    }
+.prose h3,
+.prose h4 {
+    font-family: var(--font-jetbrains), monospace;
 }
 
-@keyframes cloudDrift2 {
-    from {
-        transform: translateX(0px) scaleY(1.03);
-    }
-    to {
-        transform: translateX(-55px) scaleY(1);
-    }
+.prose h2::before {
+    content: "> ";
+    color: var(--accent);
+    font-family: var(--font-jetbrains), monospace;
+    font-size: 0.7em;
+}
+
+.prose a {
+    color: var(--accent);
+    text-decoration-color: var(--line);
+}
+
+.prose a:hover {
+    text-decoration-color: var(--accent);
+}
+
+.prose :not(pre) > code {
+    color: var(--accent);
+    background: #6dffb30f;
+    border: 1px solid var(--line);
+}
+
+/* Panels: code blocks, cards, callouts, tables */
+.prose pre,
+figure.shiki,
+#nd-sidebar,
+[data-card],
+.prose table {
+    border-color: var(--line) !important;
+}
+
+#nd-sidebar {
+    background: var(--bg-raised);
+}
+
+.prose th {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+}
+
+/* Nav title in terminal style */
+#nd-nav a[href="/"],
+#nd-sidebar a[href="/"] {
+    font-family: var(--font-jetbrains), monospace;
+    color: var(--accent);
 }
