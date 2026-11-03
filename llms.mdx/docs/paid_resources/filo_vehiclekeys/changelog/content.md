@@ -1,0 +1,104 @@
+# Changelog (/docs/paid_resources/filo_vehiclekeys/changelog)
+
+
+
+
+
+## 2.0.0 [#200]
+
+**Added**
+
+* NPC carjacking: aim at a driver, hold them up, take the car and its key
+* Vehicle class difficulty tiers with per-class lockpick/hotwire chances and hotwire times
+* Model blacklist for lockpicking, hotwiring and carjacking
+* Police bypass (job, grade, duty and optional `police_bypass` item)
+* Dispatch alerts: ps-dispatch, built-in notify + blip, or your own function
+* tr\_minigames physical lockpick and hotwire (included, pre-configured)
+* sleepless\_prompts for all prompts (included, replaces filo\_textui)
+* `/keyadmin` panel to manage vehicles, key IDs, job access and keys
+* Automatic key removal for unowned vehicles on despawn and restart
+* `HasVehicleAccess` export (client and server)
+
+**Changed**
+
+* Reworked key system: one server-side registry, key IDs validated on the server
+* Framework, inventory, minigames, dispatch and target code moved to an open `bridge/` folder
+* Admin command is now `/keyadmin`
+
+**Fixed**
+
+* `/givekey` with plates containing spaces and stored vehicles
+* Locksmith keys not saving, double key removal and many other bugs
+* Exploits: lock/unlock without keys, client-set state bags, spare key pricing
+
+## Updating from v1 [#updating-from-v1]
+
+<Steps>
+  <Step>
+    Replace the 
+
+    `filo_vehiclekeys`
+
+     folder. Back up your 
+
+    `shared/sh-config.lua`
+
+     first: the config has new sections, so copy your values over instead of reusing the old file.
+  </Step>
+
+  <Step>
+    Add 
+
+    `sleepless_prompts`
+
+    , 
+
+    `tr_core`
+
+     and 
+
+    `tr_minigames`
+
+     from the download. 
+
+    `filo_textui`
+
+     is no longer needed.
+  </Step>
+
+  <Step>
+    Add 
+
+    `police_bypass`
+
+     from 
+
+    `filo_vehiclekeys/INSTALL/ox_inventory.txt`
+
+     and 
+
+    `wire_strippers`
+
+     from 
+
+    `tr_minigames/install/ox_inventory/items.lua`
+
+    .
+  </Step>
+
+  <Step>
+    Ensure them in this order:
+
+    ```
+    ensure sleepless_prompts
+    ensure filo_vehiclekeys
+    ensure tr_core
+    ensure tr_minigames
+    ```
+  </Step>
+</Steps>
+
+<Callout type="info">
+  Existing key data in the `filo_vehiclekeys` table is kept. Scripts using the v1
+  `filo_vehiclekey` exports keep working through the compatibility layer.
+</Callout>

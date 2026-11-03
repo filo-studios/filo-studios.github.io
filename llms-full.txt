@@ -62,6 +62,279 @@ cfx.re only allow scripts to be transferred 1 time, so you won't be able to tran
   * ...or check out the official [FiveM guide](https://docs.fivem.net/docs/server-manual/setting-up-a-server/)
 
 
+# Configuration (/docs/free_resources/filo_jack/configuration)
+
+
+
+Open:
+
+```
+shared/sh-config.lua
+```
+
+## Debug [#debug]
+
+```lua
+Config.Debug = false
+```
+
+Enable console debugging.
+
+***
+
+## Allowed Jobs [#allowed-jobs]
+
+```lua
+Config.JobsAllowed = {
+    "mechanic",
+}
+```
+
+Set to `nil` to allow everyone.
+
+Example:
+
+```lua
+Config.JobsAllowed = nil
+```
+
+***
+
+## Required Item [#required-item]
+
+```lua
+Config.RequiredItem = "vehicle_jack"
+```
+
+Set to `nil` to disable the inventory requirement.
+
+```lua
+Config.RequiredItem = nil
+```
+
+
+# Exports (/docs/free_resources/filo_jack/exports)
+
+
+
+## IsLifted [#islifted]
+
+Checks whether a vehicle has been fully lifted.
+
+### Client [#client]
+
+```lua
+local lifted = exports.filo_jack:IsLifted(vehicle)
+```
+
+Specify a side.
+
+```lua
+local lifted = exports.filo_jack:IsLifted(vehicle, "left")
+```
+
+### Parameters [#parameters]
+
+| Name   | Type   | Description                      |
+| ------ | ------ | -------------------------------- |
+| entity | number | Vehicle entity                   |
+| side   | string | `"left"` or `"right"` (optional) |
+
+### Returns [#returns]
+
+```lua
+boolean
+```
+
+
+# filo_jack (/docs/free_resources/filo_jack)
+
+
+
+A realistic **FiveM vehicle jack** that allows players to physically lift either side of a vehicle using floor jacks.
+
+## Features [#features]
+
+* Lift either the left or right side independently
+* Realistic pump-by-pump animation
+* Accurate vehicle roll geometry
+* Automatic height compensation
+* Support for jacking both sides simultaneously
+* Export available for detecting lifted vehicles
+
+## Requirements [#requirements]
+
+* [ox\_lib](https://github.com/overextended/ox_lib)
+* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
+
+Continue with the installation guide to get started.
+
+
+# Installation (/docs/free_resources/filo_jack/installation)
+
+
+
+## 1. Install the resource [#1-install-the-resource]
+
+Place the resource inside your server's resources folder.
+
+```
+resources/
+    filo_jack/
+```
+
+## 2. Ensure the resource [#2-ensure-the-resource]
+
+Add the following to your `server.cfg`.
+
+```
+ensure ox_lib
+
+# ensure frameworkName [qbx_core/qb-core]
+
+ensure community_bridge
+ensure filo_jack
+```
+
+## 3. Install dependencies [#3-install-dependencies]
+
+Required:
+
+* [ox\_lib](https://github.com/overextended/ox_lib)
+* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
+
+## 4. Inventory Item [#4-inventory-item]
+
+Create the following inventory item.
+
+```
+['vehicle_jack'] = {
+    label = 'Vehicle Jack',
+    weight = 500,
+},
+```
+
+An item image is included inside:
+
+```
+INSTALL/item images/
+```
+
+## 5. Restart the server [#5-restart-the-server]
+
+Once installed, restart your server.
+
+
+# Usage (/docs/free_resources/filo_jack/usage)
+
+
+
+Approach either side of a vehicle.
+
+Available interactions include:
+
+| Action              | Description                    |
+| ------------------- | ------------------------------ |
+| Attach Jack (Left)  | Place a jack on the left side  |
+| Attach Jack (Right) | Place a jack on the right side |
+| Pump Jack (Left)    | Raise the left side            |
+| Pump Jack (Right)   | Raise the right side           |
+| Detach Jack (Left)  | Remove the left jack           |
+| Detach Jack (Right) | Remove the right jack          |
+
+## Notes [#notes]
+
+* Players must be close to the vehicle.
+* Players must stand on the correct side.
+* Both sides may be lifted independently.
+* Removing one jack correctly preserves the remaining side.
+
+
+# filo_slashtire (/docs/free_resources/filo_slashtire)
+
+
+
+`filo_slashtire` allows players to puncture vehicle tires using configurable melee weapons. The resource automatically detects the nearest tire, synchronizes the damage across all clients, and integrates with **ox\_target** for seamless interaction.
+
+## Features [#features]
+
+* Lightweight and optimized
+* Automatic closest tire detection
+* Configurable allowed weapons
+* Fully synchronized tire damage
+* Framework independent
+
+## Requirements [#requirements]
+
+* [ox\_lib](https://github.com/overextended/ox_lib)
+* [ox\_target](https://github.com/overextended/ox_target)
+
+## Installation [#installation]
+
+1. Place `filo_slashtire` in your `resources` folder.
+2. Ensure the required dependencies before the resource.
+
+```
+ensure ox_lib
+ensure ox_target
+ensure filo_slashtire
+```
+
+## Configuration [#configuration]
+
+### Allowed Weapons [#allowed-weapons]
+
+Configure which weapons can slash tires in:
+
+```text
+shared/sh-config.lua
+```
+
+Example:
+
+```lua
+Config.AllowedWeapons = {
+    `WEAPON_KNIFE`,
+    `WEAPON_SWITCHBLADE`,
+    `WEAPON_DAGGER`
+}
+```
+
+Any GTA V weapon hash can be added or removed from this table.
+
+## Usage [#usage]
+
+1. Equip one of the configured weapons.
+2. Walk up to a vehicle tire.
+3. Target the tire using **ox\_target**.
+4. Select **Slash Tire**.
+5. The tire will be punctured for everyone on the server.
+
+## Compatibility [#compatibility]
+
+| Resource   | Required |
+| ---------- | -------- |
+| ox\_lib    | ✅        |
+| ox\_target | ✅        |
+
+## Support [#support]
+
+If you encounter an issue, please include:
+
+* Server artifacts version
+* Resource version
+* Console errors
+* Steps to reproduce
+
+For support and updates:
+
+* **Discord**: [https://discord.gg/ReEE9HgA4c](https://discord.gg/ReEE9HgA4c)
+* **Store**: [https://filo.tebex.io](https://filo.tebex.io)
+
+```
+```
+
+
 # Configuration (/docs/free_resources/filo_bolt/configuration)
 
 
@@ -385,279 +658,6 @@ Before installing, make sure the following resource is running on your server:
 <Callout type="warn">
   Do not rename the resource folder. The export is registered under `filo_bolt` and callers reference it by that name.
 </Callout>
-
-
-# Configuration (/docs/free_resources/filo_jack/configuration)
-
-
-
-Open:
-
-```
-shared/sh-config.lua
-```
-
-## Debug [#debug]
-
-```lua
-Config.Debug = false
-```
-
-Enable console debugging.
-
-***
-
-## Allowed Jobs [#allowed-jobs]
-
-```lua
-Config.JobsAllowed = {
-    "mechanic",
-}
-```
-
-Set to `nil` to allow everyone.
-
-Example:
-
-```lua
-Config.JobsAllowed = nil
-```
-
-***
-
-## Required Item [#required-item]
-
-```lua
-Config.RequiredItem = "vehicle_jack"
-```
-
-Set to `nil` to disable the inventory requirement.
-
-```lua
-Config.RequiredItem = nil
-```
-
-
-# Exports (/docs/free_resources/filo_jack/exports)
-
-
-
-## IsLifted [#islifted]
-
-Checks whether a vehicle has been fully lifted.
-
-### Client [#client]
-
-```lua
-local lifted = exports.filo_jack:IsLifted(vehicle)
-```
-
-Specify a side.
-
-```lua
-local lifted = exports.filo_jack:IsLifted(vehicle, "left")
-```
-
-### Parameters [#parameters]
-
-| Name   | Type   | Description                      |
-| ------ | ------ | -------------------------------- |
-| entity | number | Vehicle entity                   |
-| side   | string | `"left"` or `"right"` (optional) |
-
-### Returns [#returns]
-
-```lua
-boolean
-```
-
-
-# filo_jack (/docs/free_resources/filo_jack)
-
-
-
-A realistic **FiveM vehicle jack** that allows players to physically lift either side of a vehicle using floor jacks.
-
-## Features [#features]
-
-* Lift either the left or right side independently
-* Realistic pump-by-pump animation
-* Accurate vehicle roll geometry
-* Automatic height compensation
-* Support for jacking both sides simultaneously
-* Export available for detecting lifted vehicles
-
-## Requirements [#requirements]
-
-* [ox\_lib](https://github.com/overextended/ox_lib)
-* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
-
-Continue with the installation guide to get started.
-
-
-# Installation (/docs/free_resources/filo_jack/installation)
-
-
-
-## 1. Install the resource [#1-install-the-resource]
-
-Place the resource inside your server's resources folder.
-
-```
-resources/
-    filo_jack/
-```
-
-## 2. Ensure the resource [#2-ensure-the-resource]
-
-Add the following to your `server.cfg`.
-
-```
-ensure ox_lib
-
-# ensure frameworkName [qbx_core/qb-core]
-
-ensure community_bridge
-ensure filo_jack
-```
-
-## 3. Install dependencies [#3-install-dependencies]
-
-Required:
-
-* [ox\_lib](https://github.com/overextended/ox_lib)
-* [community\_bridge](https://github.com/TheOrderFivem/community_bridge)
-
-## 4. Inventory Item [#4-inventory-item]
-
-Create the following inventory item.
-
-```
-['vehicle_jack'] = {
-    label = 'Vehicle Jack',
-    weight = 500,
-},
-```
-
-An item image is included inside:
-
-```
-INSTALL/item images/
-```
-
-## 5. Restart the server [#5-restart-the-server]
-
-Once installed, restart your server.
-
-
-# Usage (/docs/free_resources/filo_jack/usage)
-
-
-
-Approach either side of a vehicle.
-
-Available interactions include:
-
-| Action              | Description                    |
-| ------------------- | ------------------------------ |
-| Attach Jack (Left)  | Place a jack on the left side  |
-| Attach Jack (Right) | Place a jack on the right side |
-| Pump Jack (Left)    | Raise the left side            |
-| Pump Jack (Right)   | Raise the right side           |
-| Detach Jack (Left)  | Remove the left jack           |
-| Detach Jack (Right) | Remove the right jack          |
-
-## Notes [#notes]
-
-* Players must be close to the vehicle.
-* Players must stand on the correct side.
-* Both sides may be lifted independently.
-* Removing one jack correctly preserves the remaining side.
-
-
-# filo_slashtire (/docs/free_resources/filo_slashtire)
-
-
-
-`filo_slashtire` allows players to puncture vehicle tires using configurable melee weapons. The resource automatically detects the nearest tire, synchronizes the damage across all clients, and integrates with **ox\_target** for seamless interaction.
-
-## Features [#features]
-
-* Lightweight and optimized
-* Automatic closest tire detection
-* Configurable allowed weapons
-* Fully synchronized tire damage
-* Framework independent
-
-## Requirements [#requirements]
-
-* [ox\_lib](https://github.com/overextended/ox_lib)
-* [ox\_target](https://github.com/overextended/ox_target)
-
-## Installation [#installation]
-
-1. Place `filo_slashtire` in your `resources` folder.
-2. Ensure the required dependencies before the resource.
-
-```
-ensure ox_lib
-ensure ox_target
-ensure filo_slashtire
-```
-
-## Configuration [#configuration]
-
-### Allowed Weapons [#allowed-weapons]
-
-Configure which weapons can slash tires in:
-
-```text
-shared/sh-config.lua
-```
-
-Example:
-
-```lua
-Config.AllowedWeapons = {
-    `WEAPON_KNIFE`,
-    `WEAPON_SWITCHBLADE`,
-    `WEAPON_DAGGER`
-}
-```
-
-Any GTA V weapon hash can be added or removed from this table.
-
-## Usage [#usage]
-
-1. Equip one of the configured weapons.
-2. Walk up to a vehicle tire.
-3. Target the tire using **ox\_target**.
-4. Select **Slash Tire**.
-5. The tire will be punctured for everyone on the server.
-
-## Compatibility [#compatibility]
-
-| Resource   | Required |
-| ---------- | -------- |
-| ox\_lib    | ✅        |
-| ox\_target | ✅        |
-
-## Support [#support]
-
-If you encounter an issue, please include:
-
-* Server artifacts version
-* Resource version
-* Console errors
-* Steps to reproduce
-
-For support and updates:
-
-* **Discord**: [https://discord.gg/ReEE9HgA4c](https://discord.gg/ReEE9HgA4c)
-* **Store**: [https://filo.tebex.io](https://filo.tebex.io)
-
-```
-```
 
 
 # Configuration (/docs/free_resources/filo_stealwheels/configuration)
@@ -1226,6 +1226,112 @@ end
 ```
 
 
+# Changelog (/docs/paid_resources/filo_vehiclekeys/changelog)
+
+
+
+
+
+## 2.0.0 [#200]
+
+**Added**
+
+* NPC carjacking: aim at a driver, hold them up, take the car and its key
+* Vehicle class difficulty tiers with per-class lockpick/hotwire chances and hotwire times
+* Model blacklist for lockpicking, hotwiring and carjacking
+* Police bypass (job, grade, duty and optional `police_bypass` item)
+* Dispatch alerts: ps-dispatch, built-in notify + blip, or your own function
+* tr\_minigames physical lockpick and hotwire (included, pre-configured)
+* sleepless\_prompts for all prompts (included, replaces filo\_textui)
+* `/keyadmin` panel to manage vehicles, key IDs, job access and keys
+* Automatic key removal for unowned vehicles on despawn and restart
+* `HasVehicleAccess` export (client and server)
+
+**Changed**
+
+* Reworked key system: one server-side registry, key IDs validated on the server
+* Framework, inventory, minigames, dispatch and target code moved to an open `bridge/` folder
+* Admin command is now `/keyadmin`
+
+**Fixed**
+
+* `/givekey` with plates containing spaces and stored vehicles
+* Locksmith keys not saving, double key removal and many other bugs
+* Exploits: lock/unlock without keys, client-set state bags, spare key pricing
+
+## Updating from v1 [#updating-from-v1]
+
+<Steps>
+  <Step>
+    Replace the 
+
+    `filo_vehiclekeys`
+
+     folder. Back up your 
+
+    `shared/sh-config.lua`
+
+     first: the config has new sections, so copy your values over instead of reusing the old file.
+  </Step>
+
+  <Step>
+    Add 
+
+    `sleepless_prompts`
+
+    , 
+
+    `tr_core`
+
+     and 
+
+    `tr_minigames`
+
+     from the download. 
+
+    `filo_textui`
+
+     is no longer needed.
+  </Step>
+
+  <Step>
+    Add 
+
+    `police_bypass`
+
+     from 
+
+    `filo_vehiclekeys/INSTALL/ox_inventory.txt`
+
+     and 
+
+    `wire_strippers`
+
+     from 
+
+    `tr_minigames/install/ox_inventory/items.lua`
+
+    .
+  </Step>
+
+  <Step>
+    Ensure them in this order:
+
+    ```
+    ensure sleepless_prompts
+    ensure filo_vehiclekeys
+    ensure tr_core
+    ensure tr_minigames
+    ```
+  </Step>
+</Steps>
+
+<Callout type="info">
+  Existing key data in the `filo_vehiclekeys` table is kept. Scripts using the v1
+  `filo_vehiclekey` exports keep working through the compatibility layer.
+</Callout>
+
+
 # Compatibility (/docs/paid_resources/filo_vehiclekeys/compatibility)
 
 
@@ -1695,6 +1801,8 @@ decided on the server and everything is tuned from `shared/sh-config.lua`.
   <Card title="Flows" href="/docs/paid_resources/filo_vehiclekeys/flows" description="Theft, carjacking, locksmith, admin panel and key validation." />
 
   <Card title="Exports" href="/docs/paid_resources/filo_vehiclekeys/exports" description="Client and server exports for use in other resources." />
+
+  <Card title="Changelog" href="/docs/paid_resources/filo_vehiclekeys/changelog" description="What changed in v2.0.0 and how to update from v1." />
 
   <Card title="Compatibility" href="/docs/paid_resources/filo_vehiclekeys/compatibility" description="qb-vehiclekeys, qbx_vehiclekeys, tr_minigames and the bridge." />
 </Cards>

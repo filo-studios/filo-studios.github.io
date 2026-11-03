@@ -57,5 +57,7 @@ decided on the server and everything is tuned from `shared/sh-config.lua`.
 
   <Card title="Exports" href="/docs/paid_resources/filo_vehiclekeys/exports" description="Client and server exports for use in other resources." />
 
+  <Card title="Changelog" href="/docs/paid_resources/filo_vehiclekeys/changelog" description="What changed in v2.0.0 and how to update from v1." />
+
   <Card title="Compatibility" href="/docs/paid_resources/filo_vehiclekeys/compatibility" description="qb-vehiclekeys, qbx_vehiclekeys, tr_minigames and the bridge." />
 </Cards>

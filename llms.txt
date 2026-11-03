@@ -44,3 +44,4 @@
     - [Configuration](/docs/paid_resources/filo_vehiclekeys/configuration): Every config section in shared/sh-config.lua explained.
     - [Exports](/docs/paid_resources/filo_vehiclekeys/exports): Client and server exports provided by filo_vehiclekeys for use in other resources.
     - [Flows](/docs/paid_resources/filo_vehiclekeys/flows): Theft, carjacking, police, locksmith, admin panel and how keys are validated.
+    - [Changelog](/docs/paid_resources/filo_vehiclekeys/changelog): What changed in v2.0.0 and how to update from v1.
